@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
 import './style/style.css';
 
 import Header from './components/pages/Header';
