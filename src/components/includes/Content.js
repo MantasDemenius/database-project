@@ -9,10 +9,12 @@ class Content extends Component {
 
   render() {
     return (
-      <div>
-        <Route exact path='/' component={Index}></Route>
-        <Route path='/imones' component={Imones}></Route>
-      </div>
+      <content>
+        <div className="content">
+          <Route exact path='/' component={Index}></Route>
+          <Route path='/imones' component={Imones}></Route>
+        </div>
+      </content>
     );
   }
 }

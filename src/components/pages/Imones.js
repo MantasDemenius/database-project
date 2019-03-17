@@ -28,7 +28,10 @@ state = {
 
   render() {
     return  this.state.imones.map((record) => (
-      <ContentItem key={record.id} item={record}/>
+      <div className="content-item">
+        <ContentItem key={record.id} item={record}/>
+      </div>
+
     ));
   }
 }
