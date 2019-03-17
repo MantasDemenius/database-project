@@ -14,3 +14,45 @@
    color: #333;
    text-decoration: none;
  }
+
+.header {
+  font-family: 'Alex Brush', cursive, 'Cookie';
+  height:30%;
+  font-size: 2em;
+  font-weight: normal;
+  color: #FFD48b;
+  text-align:center
+}
+
+.navigation-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.top-nav {
+  display: inline-flex;
+  font-size: 0.7em;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 400;
+  list-style: none;
+}
+
+.top-nav li {
+  padding: 0.2em;
+  border:black 2px solid;
+}
+
+.content{
+  width: 80%;
+  background: grey;
+  margin:auto;
+  padding:auto;
+}
+
+.content-item {
+  background: yellow;
+  width:60%;
+  float:left;
+}
