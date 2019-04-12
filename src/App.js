@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   getUsers = _ => {
-  fetch('http://localhost:3000')
+  fetch('http://localhost:3001')
   .then(response => console.log(response))//response.json())
   .then(({response}) => this.setState({users: 'response.users'}))
   .catch(error => console.log(error));
