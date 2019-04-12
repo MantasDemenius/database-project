@@ -3,9 +3,23 @@ const path = require('path');
 
 module.exports = (app, conn) => {
   app.get('/', (req, res) => {
-    conn.query("SELECT * FROM 'restoranas_v3'.klientas", function (err, result, fields) {
+    res.send("Go to /users to see users")
+  });
+
+  app.get('/clients', (req, res) => {
+    conn.query("SELECT * FROM klientas", (err, results) => {
       if (err) throw err;
-      res.json({klientas: result});
+      res.json({data: results});
     });
   });
-};
+
+  // app.get('/users/add', (req, res) => {
+  //   const { name, price} = req.query;
+  //   const insert = 'INSERT INTO PRODUCTS VALUES ('${name}', '${price}')';
+  //   conn.query(insert, (err, data) => {
+  //     if (err) throw err;
+  //     res.send("Added product");
+  //   });
+  // });
+
+}
