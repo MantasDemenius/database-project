@@ -6,11 +6,20 @@ const port = 4000;
 
 app.use(cors());
 
+//Localhost
+// const conn = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : 'root',
+//   password : '',
+//   database : 'restoranas_v3'
+// });
+
+//Ktu server
 const conn = mysql.createConnection({
   host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'restoranas_v3'
+  user     : 'mandem',
+  password : 'ih1chooPhiemuw4e',
+  database : 'mandem'
 });
 
 conn.connect(function(err){
