@@ -7,9 +7,9 @@ module.exports = (app, conn) => {
   });
 
   app.get('/clients', (req, res) => {
-    conn.query("SELECT * FROM klientas", (err, results) => {
+    conn.query("SELECT * FROM klientas", (err, data) => {
       if (err) throw err;
-      res.json({data: results});
+      res.json({results: data});
     });
   });
 
