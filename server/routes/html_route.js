@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = (app, conn) => {
   app.get('/', (req, res) => {
-    res.send("Go to /users to see users")
+    res.send("Go to /clients to see Klientas table")
   });
 
   app.get('/clients', (req, res) => {
