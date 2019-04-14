@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   getUsers = _ => {
-    axios.get('/clients')
+    axios.get('/imones')
     .then(response => {
       this.setState({users: response.data.results});
     })
@@ -29,7 +29,7 @@ class App extends Component {
     // .catch(error => console.log(error))
   }
 
-  showUsers = ({ id_KLIENTAS, Vardas}) => <div key={id_KLIENTAS}>{Vardas}</div>
+  showUsers = ({ id_IMONE, Pavadinimas}) => <div key={id_IMONE}>{Pavadinimas}</div>
 
   render() {
     const { users } = this.state;

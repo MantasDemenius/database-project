@@ -3,11 +3,11 @@ const path = require('path');
 
 module.exports = (app, conn) => {
   app.get('/', (req, res) => {
-    res.send("Go to /clients to see Klientas table")
+    res.send("Go to /imones to see imones table")
   });
 
-  app.get('/clients', (req, res) => {
-    conn.query("SELECT * FROM klientas", (err, data) => {
+  app.get('/imones', (req, res) => {
+    conn.query("SELECT * FROM imone", (err, data) => {
       if (err) throw err;
       res.json({results: data});
     });
