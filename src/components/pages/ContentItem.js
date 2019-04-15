@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 
 
 
-class ContentItem extends Component {
+export class ContentItem extends Component {
   render() {
     return (
-      <React.Fragment>
-        <p>{this.props.item.title}</p>
-      </React.Fragment>
-
+      <div className="content-item">
+        <p>{this.props.item.Pavadinimas}
+        <button className="btn-del">X</button>
+        </p>
+      </div>
     );
   }
 }

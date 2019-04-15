@@ -55,4 +55,9 @@
   background: yellow;
   width:60%;
   float:left;
+  border-bottom: black 1px solid;
+}
+
+.btn-del {
+  float:right;
 }
