@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 
 import Imones from '../pages/Imones';
 import Index from '../pages/Index';
+import Edit from '../forms/Edit';
 
 class Content extends Component {
 
@@ -12,6 +13,7 @@ class Content extends Component {
         <div className="content">
           <Route exact path='/' component={Index}></Route>
           <Route path='/imones' component={Imones}></Route>
+          <Route path='/imones/edit' component={Edit}></Route>
         </div>
     );
   }

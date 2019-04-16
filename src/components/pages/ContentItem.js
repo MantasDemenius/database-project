@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom'
 
 
-
+        //<button className="btn-edit" onClick={this.redirectToTarget}>Edit</button>
 export class ContentItem extends Component {
+
   render() {
-    const { id_IMONE, Pavadinimas } = this.props.item;
+    console.log(this.props.item);
+    const { match: { url }, id_IMONE, Pavadinimas } = this.props.item;
     return (
       <div className="content-item">
-        <p>{Pavadinimas}
+        <p key={id_IMONE}>{Pavadinimas}
         <button className="btn-del" onClick={this.props.delItem.bind(this, id_IMONE)}>Delete</button>
-        <button className="btn-edit">Edit</button>
+        <Link className="btn-edit" to={`${url}/edit`}>Edit</Link>
+
         </p>
       </div>
     );

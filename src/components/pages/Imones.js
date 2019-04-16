@@ -23,27 +23,29 @@ class Imones extends Component {
   delItem = (id_IMONE) => {
     axios({
       method: 'post',
-      headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    },
-      url: '/imones/del?id=' + `${id_IMONE}`
+    //   headers: {
+    // 'Accept': 'application/json',
+    // 'Content-Type': 'application/json',
+    // },
+      url: `/imones/del?id=${id_IMONE}`
     })
     .then(response => {
-      console.log(response);
-      console.log("success");
+      if(response.status === 200)
+        console.log("success");
     })
     .catch(err => {
-      console.log(id_IMONE);
       console.log(err);
-      console.log("fail");
     });
+  }
+
+  editItem = (id) => {
+    console.log(id);
   }
 
   render() {
     return this.state.items.map((item) => (
       <React.Fragment>
-        <ContentItem key={item.id_IMONE} item={item} delItem={this.delItem}  />
+        <ContentItem item={item} delItem={this.delItem}  />
       </React.Fragment>
 
     ));

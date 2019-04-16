@@ -15,7 +15,6 @@ module.exports = (app, conn) => {
 
   app.post('/imones/del', (req, res) => {
     let id = req.query.id;
-    console.log(id);
     conn.query("SELECT * FROM imone WHERE id_IMONE = " + mysql.escape(id), (err, data) => {
       if (err) throw err;
       res.sendStatus(200);
