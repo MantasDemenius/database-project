@@ -6,15 +6,12 @@ import Content from './components/includes/Content';
 
 class App extends Component {
 
-  render() {
 
+  render() {
     return (
       <div className="App">
         <Header />
         <Content />
-
-
-
       </div>
     );
   }
