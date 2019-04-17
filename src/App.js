@@ -14,11 +14,9 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-          <div className="content">
             <Route exact path='/' component={Index}></Route>
             <Route path='/imones' component={Imones}></Route>
 
-          </div>
       </div>
     );
   }

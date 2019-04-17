@@ -1,9 +1,23 @@
 import React from 'react';
+import { Form, Button } from 'semantic-ui-react'
 
-export default ({ id_IMONE, Pavadinimas }) =>
+export default ({ id_IMONE, Pavadinimas, Adresas, Telefono_numeris }) =>
   <React.Fragment>
-    {id_IMONE}
-    {Pavadinimas}
+    <Form>
+    <Form.Field>
+      <label>Pavadinimas</label>
+      <input placeholder={Pavadinimas} />
+    </Form.Field>
+    <Form.Field>
+      <label>Adresas</label>
+      <input placeholder={Adresas} />
+    </Form.Field>
+    <Form.Field>
+      <label>Telefono numeris</label>
+      <input placeholder={Telefono_numeris} />
+    </Form.Field>
+    <Button type='submit'>Pakeisti</Button>
+  </Form>
   </React.Fragment>
 
 

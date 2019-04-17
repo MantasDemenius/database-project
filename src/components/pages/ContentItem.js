@@ -25,13 +25,11 @@ export class ContentItem extends Component {
         <Table.Body>
           {items.map(item  =>
           <Table.Row key={item.id_IMONE}>
-
-
                 <Table.Cell>{item.Pavadinimas}</Table.Cell>
                 <Table.Cell>{item.Adresas}</Table.Cell>
                 <Table.Cell>{item.Telefono_numeris}</Table.Cell>
-                <Table.Cell><Button primary><Link style={button} to={`${url}/edit/${item.id_IMONE}`}>Edit</Link></Button></Table.Cell>
-                <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_IMONE)}>Delete</Button></Table.Cell>
+                <Table.Cell><Button primary><Link style={button} to={`${url}/edit/${item.id_IMONE}`}>Redaguoti</Link></Button></Table.Cell>
+                <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_IMONE)}>Ištrinti</Button></Table.Cell>
           </Table.Row>
           )}
         </Table.Body>
