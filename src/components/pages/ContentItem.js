@@ -15,6 +15,7 @@ export class ContentItem extends Component {
       <Table singleLine>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell>Id</Table.HeaderCell>
             <Table.HeaderCell>Pavadinimas</Table.HeaderCell>
             <Table.HeaderCell>Adresas</Table.HeaderCell>
             <Table.HeaderCell>Telefono numeris</Table.HeaderCell>
@@ -25,6 +26,7 @@ export class ContentItem extends Component {
         <Table.Body>
           {items.map(item  =>
           <Table.Row key={item.id_IMONE}>
+                <Table.Cell>{item.id_IMONE}</Table.Cell>
                 <Table.Cell>{item.Pavadinimas}</Table.Cell>
                 <Table.Cell>{item.Adresas}</Table.Cell>
                 <Table.Cell>{item.Telefono_numeris}</Table.Cell>
