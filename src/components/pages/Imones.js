@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Route } from 'react-router-dom';
 import ContentItem from './ContentItem';
 
 class Imones extends Component {
@@ -20,7 +21,7 @@ class Imones extends Component {
     .catch(error => console.log(error));
   }
 
-  delItem = (id_IMONE) => {
+  itemDel = (id_IMONE) => {
     axios({
       method: 'post',
     //   headers: {
@@ -38,17 +39,15 @@ class Imones extends Component {
     });
   }
 
-  editItem = (id) => {
-    console.log(id);
-  }
-
   render() {
-    return this.state.items.map((item) => (
+    return(
       <React.Fragment>
-        <ContentItem item={item} delItem={this.delItem}  />
+        <Route exact path="/imones" render={props => (
+                <ContentItem {...props} items={this.state.items} itemDel={this.itemDel}/>
+            )} />
       </React.Fragment>
 
-    ));
+    );
   }
 }
 

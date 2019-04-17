@@ -1,28 +1,25 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 
 
-        //<button className="btn-edit" onClick={this.redirectToTarget}>Edit</button>
 export class ContentItem extends Component {
 
   render() {
-    console.log(this.props.item);
-    const { match: { url }, id_IMONE, Pavadinimas } = this.props.item;
+    const { match: { url }} = this.props;
     return (
       <div className="content-item">
-        <p key={id_IMONE}>{Pavadinimas}
-        <button className="btn-del" onClick={this.props.delItem.bind(this, id_IMONE)}>Delete</button>
-        <Link className="btn-edit" to={`${url}/edit`}>Edit</Link>
+        {this.props.items.map(item  =>
+          <p key={item.id_IMONE}>
+            {item.Pavadinimas}
+            <Link to={`${url}/edit/${item.id_IMONE}`}>Edit</Link>
+            <Button negative onClick={this.props.itemDel.bind(this, item.id_IMONE)}>Delete</Button>
 
-        </p>
+          </p>
+        )}
+
       </div>
     );
   }
 }
-
-ContentItem.propTypes = {
-  item: PropTypes.object.isRequired
-}
-
-export default ContentItem;
+export default ContentItem
