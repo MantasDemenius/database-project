@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export default ({ id_IMONE, Pavadinimas }) =>
   <React.Fragment>
     {id_IMONE}
     {Pavadinimas}
-    <h1>dadsa</h1>
   </React.Fragment>
 
 
