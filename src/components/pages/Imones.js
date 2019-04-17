@@ -42,7 +42,7 @@ class Imones extends Component {
   render() {
     return(
       <React.Fragment>
-        <Route exact path="/imones" render={props => (
+        <Route path="/imones" render={props => (
                 <ContentItem {...props} items={this.state.items} itemDel={this.itemDel}/>
             )} />
       </React.Fragment>
