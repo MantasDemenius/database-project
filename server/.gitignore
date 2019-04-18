@@ -11,5 +11,3 @@ npm-debug.log
 Dockerfile
 docker-compose.yml
 
-#sql
-restoranas_v3.sql
