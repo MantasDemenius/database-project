@@ -77,7 +77,7 @@ class Edit extends Component {
   render () {
     const { data, errors } = this.state;
     return (
-      <React.Fragment>
+      <div style={form}>
         <Form onSubmit={this.onSubmit}>
           <Form.Field>
             <label>ID</label>
@@ -103,13 +103,16 @@ class Edit extends Component {
           </Form.Field>
           <Button type='submit'>Pakeisti</Button>
       </Form>
-      </React.Fragment>
+    </div>
 
     );
   }
 }
 
-
+const form = {
+  padding: '1% 0',
+  border: 'px solid rgba(34,36,38,.15)'
+}
 export default Edit;
 
 
