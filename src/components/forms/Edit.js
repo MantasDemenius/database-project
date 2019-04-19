@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'semantic-ui-react'
 import InLineError from '../messages/InLineError';
-
+import '../../style/modalContentStyle.css';
 
 class Edit extends Component {
 
@@ -60,6 +60,7 @@ class Edit extends Component {
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai paredaguotas");
+        //this.props.history.push(`/imones`);
         window.location.reload();
     })
     .catch(err => {
@@ -76,45 +77,53 @@ class Edit extends Component {
     return errors;
   }
 
+  componentDidMount() {
+    document.getElementById('myModal').style.display = "block";
+  }
+
+  closeModal = _ => {
+    document.getElementById('myModal').style.display = "none";
+    //this.state.history.push(`/imones`);
+  }
+
+
   render () {
     const { data, errors } = this.state;
     return (
-      <div style={form}>
-        <Form onSubmit={this.onSubmit}>
-          <Form.Field>
-            <label>ID</label>
-            {data.id_IMONE}
-          </Form.Field>
-          <Form.Field>
-            <label>Pavadinimas</label>
-            <input name="Pavadinimas" placeholder={this.props.Pavadinimas} value={data.Pavadinimas}
-              onChange={this.onChange} />
-            {errors.Pavadinimas && <InLineError text={errors.Pavadinimas} />}
-          </Form.Field>
-          <Form.Field>
-            <label>Adresas</label>
-            <input name="Adresas" placeholder={this.props.Adresas} value={data.Adresas}
-              onChange={this.onChange} />
-            {errors.Adresas && <InLineError text={errors.Adresas} />}
-          </Form.Field>
-          <Form.Field>
-            <label>Telefono numeris</label>
-            <input name="Telefono_numeris" placeholder={this.props.Telefono_numeris} value={data.Telefono_numeris}
-              onChange={this.onChange} />
-            {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}
-          </Form.Field>
-          <Button type='submit'>Pakeisti</Button>
-      </Form>
-    </div>
-
+      <div id="myModal" className="modal">
+          <div className="modalContent">
+            <div className="closeCursor" onClick={this.closeModal}>&times;</div>
+              <Form onSubmit={this.onSubmit}>
+                <Form.Field>
+                  <label>ID</label>
+                  {data.id_IMONE}
+                </Form.Field>
+                <Form.Field>
+                  <label>Pavadinimas</label>
+                  <input name="Pavadinimas" placeholder={this.props.Pavadinimas} value={data.Pavadinimas}
+                    onChange={this.onChange} />
+                  {errors.Pavadinimas && <InLineError text={errors.Pavadinimas} />}
+                </Form.Field>
+                <Form.Field>
+                  <label>Adresas</label>
+                  <input name="Adresas" placeholder={this.props.Adresas} value={data.Adresas}
+                    onChange={this.onChange} />
+                  {errors.Adresas && <InLineError text={errors.Adresas} />}
+                </Form.Field>
+                <Form.Field>
+                  <label>Telefono numeris</label>
+                  <input name="Telefono_numeris" placeholder={this.props.Telefono_numeris} value={data.Telefono_numeris}
+                    onChange={this.onChange} />
+                  {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}
+                </Form.Field>
+                <Button type='submit'>Pakeisti</Button>
+            </Form>
+          </div>
+        </div>
     );
   }
 }
 
-const form = {
-  padding: '1% 0',
-  border: 'px solid rgba(34,36,38,.15)'
-}
 export default Edit;
 
 

@@ -4,6 +4,7 @@ import { Route, Link } from 'react-router-dom';
 import ContentItem from './ContentItem';
 import addItem from '../forms/addItem';
 
+
 class Imones extends Component {
 
   state = {
@@ -44,7 +45,7 @@ class Imones extends Component {
   render() {
     return(
       <React.Fragment>
-        <div style={add}>
+        <div>
           <Route path="/imones/add" component={addItem} />
           <Link to="/imones/add">Nauja sutartis</Link>
         </div>
@@ -54,10 +55,6 @@ class Imones extends Component {
       </React.Fragment>
     );
   }
-}
-
-const add = {
-
 }
 
 export default Imones;
