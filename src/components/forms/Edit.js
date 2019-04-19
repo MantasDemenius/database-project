@@ -85,19 +85,19 @@ class Edit extends Component {
           </Form.Field>
           <Form.Field>
             <label>Pavadinimas</label>
-            <input name="name" placeholder={data.Pavadinimas} value={data.Pavadinimas}
+            <input name="Pavadinimas" placeholder={this.props.Pavadinimas} value={data.Pavadinimas}
               onChange={this.onChange} />
             {errors.Pavadinimas && <InLineError text={errors.Pavadinimas} />}
           </Form.Field>
           <Form.Field>
             <label>Adresas</label>
-            <input name="address" placeholder={data.Adresas} value={data.Adresas}
+            <input name="Adresas" placeholder={this.props.Adresas} value={data.Adresas}
               onChange={this.onChange} />
             {errors.Adresas && <InLineError text={errors.Adresas} />}
           </Form.Field>
           <Form.Field>
             <label>Telefono numeris</label>
-            <input name="phone" placeholder={data.Telefono_numeris} value={data.Telefono_numeris}
+            <input name="Telefono_numeris" placeholder={this.props.Telefono_numeris} value={data.Telefono_numeris}
               onChange={this.onChange} />
             {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}
           </Form.Field>
