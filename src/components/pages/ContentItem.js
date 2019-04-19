@@ -12,30 +12,32 @@ export class ContentItem extends Component {
         <Route path={`${url}/edit/:itemId`} render={
             props => <Edit {...items.find(item => item.id_IMONE.toString() === props.match.params.itemId)} />
         }/>
-      <Table singleLine>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>Id</Table.HeaderCell>
-            <Table.HeaderCell>Pavadinimas</Table.HeaderCell>
-            <Table.HeaderCell>Adresas</Table.HeaderCell>
-            <Table.HeaderCell>Telefono numeris</Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {items.map(item  =>
-          <Table.Row key={item.id_IMONE}>
-                <Table.Cell>{item.id_IMONE}</Table.Cell>
-                <Table.Cell>{item.Pavadinimas}</Table.Cell>
-                <Table.Cell>{item.Adresas}</Table.Cell>
-                <Table.Cell>{item.Telefono_numeris}</Table.Cell>
-                <Table.Cell><Button primary><Link style={button} to={`${url}/edit/${item.id_IMONE}`}>Redaguoti</Link></Button></Table.Cell>
-                <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_IMONE)}>Ištrinti</Button></Table.Cell>
-          </Table.Row>
-          )}
-        </Table.Body>
-      </Table>
+      <div>
+        <Table singleLine>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Id</Table.HeaderCell>
+              <Table.HeaderCell>Pavadinimas</Table.HeaderCell>
+              <Table.HeaderCell>Adresas</Table.HeaderCell>
+              <Table.HeaderCell>Telefono numeris</Table.HeaderCell>
+              <Table.HeaderCell></Table.HeaderCell>
+              <Table.HeaderCell></Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {items.map(item  =>
+            <Table.Row key={item.id_IMONE}>
+                  <Table.Cell>{item.id_IMONE}</Table.Cell>
+                  <Table.Cell>{item.Pavadinimas}</Table.Cell>
+                  <Table.Cell>{item.Adresas}</Table.Cell>
+                  <Table.Cell>{item.Telefono_numeris}</Table.Cell>
+                  <Table.Cell><Button primary><Link style={button} to={`${url}/edit/${item.id_IMONE}`}>Redaguoti</Link></Button></Table.Cell>
+                  <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_IMONE)}>Ištrinti</Button></Table.Cell>
+            </Table.Row>
+            )}
+          </Table.Body>
+        </Table>
+        </div>
       </div>
     );
   }
@@ -45,7 +47,8 @@ const button = {
   font: `bold 14px Arial`,
   textDecoration: `none`,
   color: `#ffffff`,
-  padding: `11px 0px`,
+  padding: `11px 0px`
 }
+
 
 export default ContentItem

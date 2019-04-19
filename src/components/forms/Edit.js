@@ -10,28 +10,26 @@ class Edit extends Component {
     super(props);
     this.state = {
         data: {
-          id: props.id_IMONE || '',
-          name: props.Pavadinimas || '' ,
-          address: props.Adresas || '',
-          phone: props.Telefono_numeris || ''
+          id_IMONE: props.id_IMONE || '',
+          Pavadinimas: props.Pavadinimas || '' ,
+          Adresas: props.Adresas || '',
+          Telefono_numeris: props.Telefono_numeris || ''
         },
         errors: {}
       };
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.id_IMONE);
-    console.log(prevProps.id_IMONE);
-
     if(this.props.id_IMONE !== prevProps.id_IMONE && prevProps.id_IMONE !== undefined){
       this.setState({
         data: {
-          id: this.props.id_IMONE,
-          name: this.props.Pavadinimas,
-          address: this.props.Adresas,
-          phone: this.props.Telefono_numeris
+          id_IMONE: this.props.id_IMONE,
+          Pavadinimas: this.props.Pavadinimas,
+          Adresas: this.props.Adresas,
+          Telefono_numeris: this.props.Telefono_numeris
         }
       });
+
     }
   }
 
@@ -70,9 +68,9 @@ class Edit extends Component {
 
   validate = (data) => {
     const errors = {};
-    if(!data.name) errors.name = "Can`t be blank";
-    if(!data.address) errors.address = "Can`t be blank";
-    if(!data.phone) errors.phone = "Can`t be blank";
+    if(!data.Pavadinimas) errors.Pavadinimas = "Can`t be blank";
+    if(!data.Adresas) errors.Adresas = "Can`t be blank";
+    if(!data.Telefono_numeris) errors.Telefono_numeris = "Can`t be blank";
     return errors;
   }
 
@@ -83,25 +81,25 @@ class Edit extends Component {
         <Form onSubmit={this.onSubmit}>
           <Form.Field>
             <label>ID</label>
-            {data.id}
+            {data.id_IMONE}
           </Form.Field>
           <Form.Field>
             <label>Pavadinimas</label>
-            <input name="name" placeholder={data.name} value={data.name}
+            <input name="name" placeholder={data.Pavadinimas} value={data.Pavadinimas}
               onChange={this.onChange} />
-            {errors.name && <InLineError text={errors.name} />}
+            {errors.Pavadinimas && <InLineError text={errors.Pavadinimas} />}
           </Form.Field>
           <Form.Field>
             <label>Adresas</label>
-            <input name="address" placeholder={data.address} value={data.address}
+            <input name="address" placeholder={data.Adresas} value={data.Adresas}
               onChange={this.onChange} />
-            {errors.address && <InLineError text={errors.address} />}
+            {errors.Adresas && <InLineError text={errors.Adresas} />}
           </Form.Field>
           <Form.Field>
             <label>Telefono numeris</label>
-            <input name="phone" placeholder={data.phone} value={data.phone}
+            <input name="phone" placeholder={data.Telefono_numeris} value={data.Telefono_numeris}
               onChange={this.onChange} />
-            {errors.phone && <InLineError text={errors.phone} />}
+            {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}
           </Form.Field>
           <Button type='submit'>Pakeisti</Button>
       </Form>
@@ -110,6 +108,7 @@ class Edit extends Component {
     );
   }
 }
+
 
 export default Edit;
 
