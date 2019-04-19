@@ -45,7 +45,7 @@ const button = {
   font: `bold 14px Arial`,
   textDecoration: `none`,
   color: `#ffffff`,
-  padding: `2px 6px 2px 6px`,
+  padding: `11px 0px`,
 }
 
 export default ContentItem

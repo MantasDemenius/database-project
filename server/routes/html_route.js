@@ -22,6 +22,15 @@ module.exports = (app, conn) => {
     });
   });
 
+  app.post('/imones/update', (req, res) => {
+    console.log(req.body);
+    // conn.query("Delete FROM imone WHERE id_IMONE = " + mysql.escape(id), (err, data) => {
+    //   if (err) throw err;
+    //   res.sendStatus(200);
+    //   console.log(data);
+    // });
+  });
+
   // app.get('/users/add', (req, res) => {
   //   const { name, price} = req.query;
   //   const insert = 'INSERT INTO PRODUCTS VALUES ('${name}', '${price}')';
