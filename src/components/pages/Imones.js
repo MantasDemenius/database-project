@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import ContentItem from './ContentItem';
+import addItem from '../forms/addItem';
 
 class Imones extends Component {
 
@@ -32,7 +33,8 @@ class Imones extends Component {
     })
     .then(response => {
       if(response.status === 200)
-        console.log("success");
+        console.log("Sekmingai istrintas");
+        window.location.reload();
     })
     .catch(err => {
       console.log(err);
@@ -42,16 +44,20 @@ class Imones extends Component {
   render() {
     return(
       <React.Fragment>
-        <div >
-          prideti irasas
+        <div style={add}>
+          <Route path="/imones/add" component={addItem} />
+          <Link to="/imones/add">Nauja sutartis</Link>
         </div>
         <Route path="/imones" render={props => (
                 <ContentItem {...props} items={this.state.items} itemDel={this.itemDel}/>
             )} />
       </React.Fragment>
-
     );
   }
+}
+
+const add = {
+
 }
 
 export default Imones;

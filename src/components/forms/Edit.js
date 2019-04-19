@@ -59,7 +59,8 @@ class Edit extends Component {
     })
     .then(response => {
       if(response.status === 200)
-        console.log("success");
+        console.log("Sekmingai paredaguotas");
+        window.location.reload();
     })
     .catch(err => {
       console.log(err);
@@ -68,9 +69,10 @@ class Edit extends Component {
 
   validate = (data) => {
     const errors = {};
-    if(!data.Pavadinimas) errors.Pavadinimas = "Can`t be blank";
-    if(!data.Adresas) errors.Adresas = "Can`t be blank";
-    if(!data.Telefono_numeris) errors.Telefono_numeris = "Can`t be blank";
+    const errText = "Privalomas laukelis";
+    if(!data.Pavadinimas) errors.Pavadinimas = errText;
+    if(!data.Adresas) errors.Adresas = errText;
+    if(!data.Telefono_numeris) errors.Telefono_numeris = errText;
     return errors;
   }
 
