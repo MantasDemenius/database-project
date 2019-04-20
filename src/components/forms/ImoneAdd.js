@@ -5,7 +5,7 @@ import '../../style/modalContentStyle.css';
 import axios from 'axios';
 
 
-class addItem extends Component {
+class ImoneAdd extends Component {
 
   state = {
     data: {
@@ -47,12 +47,12 @@ class addItem extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/imones/add`
+      url: `/imone/add`
     })
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/imones`);
+        this.props.history.push(`/imone`);
         window.location.reload();
 
     })
@@ -67,7 +67,7 @@ class addItem extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/imones`);
+    this.props.history.push(`/imone`);
   }
 
 
@@ -101,4 +101,4 @@ class addItem extends Component {
   }
 }
 
-export default addItem;
+export default ImoneAdd;

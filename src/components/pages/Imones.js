@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
-import ContentItem from './ContentItem';
-import addItem from '../forms/addItem';
+import ImoneItem from '../forms/ImoneItem';
+import ImoneAdd from '../forms/ImoneAdd';
 
 
 class Imones extends Component {
@@ -16,7 +16,7 @@ class Imones extends Component {
   }
 
   getItems = _ => {
-    axios.get('/imones')
+    axios.get('/imone')
     .then(response => {
       this.setState({items: response.data.results});
     })
@@ -30,7 +30,7 @@ class Imones extends Component {
     // 'Accept': 'application/json',
     // 'Content-Type': 'application/json',
     // },
-      url: `/imones/del?id=${id_IMONE}`
+      url: `/imone/del?id=${id_IMONE}`
     })
     .then(response => {
       if(response.status === 200)
@@ -46,15 +46,19 @@ class Imones extends Component {
     return(
       <React.Fragment>
         <div>
-          <Route path="/imones/add" component={addItem} />
-          <Link to="/imones/add">Nauja sutartis</Link>
+          <Route path="/imone/add" component={ImoneAdd} />
+          <Link to="/imone/add" style={link}>Nauja sutartis</Link>
         </div>
-        <Route path="/imones" render={props => (
-                <ContentItem {...props} items={this.state.items} itemDel={this.itemDel}/>
+        <Route path="/imone" render={props => (
+                <ImoneItem {...props} items={this.state.items} itemDel={this.itemDel}/>
             )} />
       </React.Fragment>
     );
   }
+}
+
+const link = {
+  float: 'right'
 }
 
 export default Imones;

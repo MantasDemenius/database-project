@@ -4,7 +4,7 @@ import { Form, Button } from 'semantic-ui-react'
 import InLineError from '../messages/InLineError';
 import '../../style/modalContentStyle.css';
 
-class Edit extends Component {
+class ImoneEdit extends Component {
 
   constructor(props) {
     super(props);
@@ -55,13 +55,15 @@ class Edit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/imones/update`
+      url: `/imone/update`
     })
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai paredaguotas");
-        //this.props.history.push(`/imones`);
-        window.location.reload();
+        // window.history.back();
+        // window.location.reload();
+        window.location.replace("/imone");
+
     })
     .catch(err => {
       console.log(err);
@@ -84,6 +86,9 @@ class Edit extends Component {
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
     //this.state.history.push(`/imones`);
+    window.history.back();
+    //window.location.reload();
+    //window.location.replace("/imones");
   }
 
 
@@ -124,24 +129,4 @@ class Edit extends Component {
   }
 }
 
-export default Edit;
-
-
-// export default ({ id_IMONE, Pavadinimas, Adresas, Telefono_numeris }) =>
-//   <React.Fragment>
-//     <Form>
-//     <Form.Field>
-//       <label>Pavadinimas</label>
-//       <input placeholder={Pavadinimas} value={Pavadinimas}/>
-//     </Form.Field>
-//     <Form.Field>
-//       <label>Adresas</label>
-//       <input placeholder={Adresas} value={Adresas}/>
-//     </Form.Field>
-//     <Form.Field>
-//       <label>Telefono numeris</label>
-//       <input placeholder={Telefono_numeris} value={Telefono_numeris}/>
-//     </Form.Field>
-//     <Button type='submit'>Pakeisti</Button>
-//   </Form>
-//   </React.Fragment>
+export default ImoneEdit;

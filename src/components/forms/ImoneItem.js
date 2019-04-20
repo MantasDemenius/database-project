@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom'
 import { Button, Table } from 'semantic-ui-react'
-import Edit from '..//forms/Edit';
+import ImoneEdit from './ImoneEdit';
 
-export class ContentItem extends Component {
+class ImoneItem extends Component {
 
   render() {
     const { match: { url }, itemDel, items} = this.props;
     return (
       <div>
         <Route path={`${url}/edit/:itemId`} render={
-            props => <Edit {...items.find(item => item.id_IMONE.toString() === props.match.params.itemId)} />
+            props => <ImoneEdit {...items.find(item => item.id_IMONE.toString() === props.match.params.itemId)} />
         }/>
       <div>
         <Table singleLine>
@@ -51,4 +51,4 @@ const button = {
 }
 
 
-export default ContentItem
+export default ImoneItem
