@@ -37,7 +37,7 @@ conn.connect(function(err){
   (err)? console.log(err) : console.log("all good my man with connection");
 });
 
-require('./routes/html_route')(app, conn);
+require('./routes/imone_route')(app, conn);
 
 // Handles any requests that don't match the ones above
 // app.get('*', (req,res) =>{

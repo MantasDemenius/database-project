@@ -8,3 +8,6 @@ How to run:
 -run npm install in console </br>
 -in duombazes folder and in terminal run node server </br>
 -on the same folder in different terminal run npm start </br>
+
+
+Validation - validator.class.php </br>
