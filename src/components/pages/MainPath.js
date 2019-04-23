@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
-import ImoneItem from '../forms/ImoneItem';
+import MainItem from '../MainItem';
 import ImoneAdd from '../forms/ImoneAdd';
 import DatabaseBoxError from '../messages/DatabaseBoxError'
 //import DatabaseBoxSuccess from '../messages/DatabaseBoxSuccess'
 
-class Imones extends Component {
+class MainPath extends Component {
 
   state = {
     items:[],
     errors: {},
-
+    url: '' || this.props.match.url
   }
 
   componentDidMount(){
     this.getItems();
+    console.log(this.state.url);
     window.scrollTo(0, 0);
   }
 
   getItems = _ => {
-    axios.get('/imone')
+    axios.get(`${this.state.url}`)
     .then(response => {
       this.setState({items: response.data.results});
     })
@@ -34,7 +35,7 @@ class Imones extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/imone/del?id=${id}`
+      url: `${this.state.url}/del?id=${id}`
     })
     .then(response => {
       if(response.status === 200)
@@ -48,21 +49,20 @@ class Imones extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    const { errors, url } = this.state;
     return(
       <React.Fragment>
         <div style={{padding: '5px'}}>
-          <Route path="/imone/add" component={ImoneAdd} />
-          <Link to="/imone/add" style={{float: 'right'}}>Nauja sutartis</Link>
+          <Link to={`${url}/add`} style={{float: 'right'}}>Nauja sutartis</Link>
         </div>
         {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
         {/*{errors.globalSucc && (<DatabaseBoxSuccess text={errors.globalSucc}/>)}*/}
-        <Route path="/imone" render={props => (
-                <ImoneItem {...props} items={this.state.items} itemDel={this.itemDel}/>
+        <Route path={`${url}`} render={props => (
+                <MainItem {...props} items={this.state.items} itemDel={this.itemDel}/>
             )} />
       </React.Fragment>
     );
   }
 }
 
-export default Imones;
+export default MainPath;

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
-import ImoneItem from '../forms/ImoneItem';
-import ImoneAdd from '../forms/ImoneAdd';
+import RestoranasItem from '../forms/RestoranasItem';
+import RestoranasAdd from '../forms/RestoranasAdd';
 import DatabaseBoxError from '../messages/DatabaseBoxError'
 //import DatabaseBoxSuccess from '../messages/DatabaseBoxSuccess'
 
-class Imones extends Component {
+class Restoranai extends Component {
 
   state = {
     items:[],
@@ -20,7 +20,7 @@ class Imones extends Component {
   }
 
   getItems = _ => {
-    axios.get('/imone')
+    axios.get('/restoranas')
     .then(response => {
       this.setState({items: response.data.results});
     })
@@ -34,7 +34,7 @@ class Imones extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/imone/del?id=${id}`
+      url: `/restoranas/del?id=${id}`
     })
     .then(response => {
       if(response.status === 200)
@@ -51,18 +51,18 @@ class Imones extends Component {
     const { errors } = this.state;
     return(
       <React.Fragment>
-        <div style={{padding: '5px'}}>
-          <Route path="/imone/add" component={ImoneAdd} />
-          <Link to="/imone/add" style={{float: 'right'}}>Nauja sutartis</Link>
-        </div>
+        {/*<div style={{padding: '5px'}}>
+          <Route path="/restoranas/add" component={RestoranasAdd} />
+          <Link to="/restoranas/add" style={{float: 'right'}}>Nauja sutartis</Link>
+        </div>*/}
         {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
         {/*{errors.globalSucc && (<DatabaseBoxSuccess text={errors.globalSucc}/>)}*/}
-        <Route path="/imone" render={props => (
-                <ImoneItem {...props} items={this.state.items} itemDel={this.itemDel}/>
+        <Route path="/restoranas" render={props => (
+                <RestoranasItem {...props} items={this.state.items} itemDel={this.itemDel}/>
             )} />
       </React.Fragment>
     );
   }
 }
 
-export default Imones;
+export default Restoranai;
