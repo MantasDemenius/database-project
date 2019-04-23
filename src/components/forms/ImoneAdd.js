@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Message } from 'semantic-ui-react';
 import InLineError from '../messages/InLineError';
 import '../../style/modalContentStyle.css';
 import axios from 'axios';
+import Validator from "validator";
+import DatabaseBoxError from '../messages/DatabaseBoxError'
 
 
 class ImoneAdd extends Component {
@@ -26,16 +28,19 @@ class ImoneAdd extends Component {
     this.setState({errors});
     if(Object.keys(errors).length === 0) {
       this.addData(this.state.data);
-      //.catch(err => this.setState({ errors: err.response.data.errors }));
     }
   }
 
   validate = (data) => {
     const errors = {};
-    const errText = "Privalomas laukelis";
-    if(!data.Pavadinimas) errors.Pavadinimas = errText;
-    if(!data.Adresas) errors.Adresas = errText;
-    if(!data.Telefono_numeris) errors.Telefono_numeris = errText;
+    const errText = "Negali buti tuscias";
+    if(!this.state.data.Pavadinimas) errors.Pavadinimas = errText;
+    if(!this.state.data.Adresas) errors.Adresas = errText;
+    if(!Validator.isMobilePhone(this.state.data.Telefono_numeris)) errors.Telefono_numeris = errText + " arba neteisingas telefono numeris";
+    // const errText = "Privalomas laukelis";
+    // if(!data.Pavadinimas) errors.Pavadinimas = errText;
+    // if(!data.Adresas) errors.Adresas = errText;
+    // if(!data.Telefono_numeris) errors.Telefono_numeris = errText;
     return errors;
   }
 
@@ -57,7 +62,7 @@ class ImoneAdd extends Component {
 
     })
     .catch(err => {
-      console.log(err);
+      this.setState( { errors: err.response.data.errors });
     });
   }
 
@@ -77,18 +82,23 @@ class ImoneAdd extends Component {
         <div id="myModal" className="modal">
             <div className="modalContent">
               <div className="closeCursor" onClick={this.closeModal}>&times;</div>
+              {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
+                <Message
+                  attached
+                  header='Prideti nauja irasa forma'
+                />
               <Form onSubmit={this.onSubmit}>
-                <Form.Field>
+                <Form.Field error={!!errors.Pavadinimas}>
                   <label>Pavadinimas*</label>
                   <input name="Pavadinimas" onChange={this.onChange} />
                   {errors.Pavadinimas && <InLineError text={errors.Pavadinimas} />}
                 </Form.Field>
-                <Form.Field>
+                <Form.Field error={!!errors.Adresas}>
                   <label>Adresas*</label>
                   <input name="Adresas" onChange={this.onChange} />
                   {errors.Adresas && <InLineError text={errors.Adresas} />}
                 </Form.Field>
-                <Form.Field>
+                <Form.Field error={!!errors.Telefono_numeris}>
                   <label>Telefono numeris*</label>
                   <input name="Telefono_numeris" onChange={this.onChange} />
                   {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}

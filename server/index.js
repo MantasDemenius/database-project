@@ -37,7 +37,12 @@ conn.connect(function(err){
   (err)? console.log(err) : console.log("all good my man with connection");
 });
 
+app.get('/', (req, res) => {
+  res.send("Go to /imones to see imones table")
+});
+
 require('./routes/imone_route')(app, conn);
+require('./routes/restoranas_route')(app, conn);
 
 // Handles any requests that don't match the ones above
 // app.get('*', (req,res) =>{
