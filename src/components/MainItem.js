@@ -3,7 +3,7 @@ import { Link, Route } from 'react-router-dom'
 import { Button, Table } from 'semantic-ui-react'
 // import ImoneEdit from './ImoneEdit';
 
-class ImoneItem extends Component {
+class MainItem extends Component {
 
 
   render() {
@@ -27,15 +27,16 @@ class ImoneItem extends Component {
           </Table.Header>
           <Table.Body>
             {items.map(item  =>
-            <Table.Row key={item.id_IMONE}>
-                  <Table.Cell>{item.id_IMONE}</Table.Cell>
-                  <Table.Cell>{item.Pavadinimas}</Table.Cell>
+              Object.keys(item).map((x) =>
+                <Table.Row key={item[x]}>
+                  <Table.Cell>{item[x]}</Table.Cell>
+                  <Table.Cell>{item[x]}</Table.Cell>
                   <Table.Cell>{item.Adresas}</Table.Cell>
                   <Table.Cell>{item.Telefono_numeris}</Table.Cell>
                   {/*<Table.Cell><Button primary><Link style={button} to={`${url}/edit/${item.id_IMONE}`}>Redaguoti</Link></Button></Table.Cell>
-                  <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_IMONE)}>Ištrinti</Button></Table.Cell>*/}
-            </Table.Row>
-            )}
+                <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_IMONE)}>Ištrinti</Button></Table.Cell>*/}
+                </Table.Row>
+          ))}
           </Table.Body>
         </Table>
         </div>
@@ -52,4 +53,5 @@ const button = {
 }
 
 
-export default ImoneItem
+
+export default MainItem

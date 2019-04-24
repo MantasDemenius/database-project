@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
-import MainItem from '../MainItem';
-import ImoneAdd from '../forms/ImoneAdd';
+import ImoneItem from '../forms/ImoneItem';
 import DatabaseBoxError from '../messages/DatabaseBoxError'
 //import DatabaseBoxSuccess from '../messages/DatabaseBoxSuccess'
 
@@ -58,7 +57,7 @@ class MainPath extends Component {
         {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
         {/*{errors.globalSucc && (<DatabaseBoxSuccess text={errors.globalSucc}/>)}*/}
         <Route path={`${url}`} render={props => (
-                <MainItem {...props} items={this.state.items} itemDel={this.itemDel}/>
+                <ImoneItem {...props} items={this.state.items} itemDel={this.itemDel}/>
             )} />
       </React.Fragment>
     );
