@@ -55,7 +55,7 @@ class ImoneEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Companies/update`
+      url: `/Companies/edit`
     })
     .then(response => {
       if(response.status === 200)

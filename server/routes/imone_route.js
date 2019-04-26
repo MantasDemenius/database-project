@@ -24,7 +24,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.post('/Companies/update', (req, res) => {
+  app.post('/Companies/edit', (req, res) => {
     var sql = "UPDATE imone SET Pavadinimas = ?, Adresas = ?, Telefono_numeris = ? WHERE id_IMONE = ?";
     conn.query(sql, [req.body.Pavadinimas, req.body.Adresas, req.body.Telefono_numeris, req.body.id_IMONE], (err, data) => {
       if (err) {

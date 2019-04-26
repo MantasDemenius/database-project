@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom'
-import { Button, Table } from 'semantic-ui-react'
-// import ImoneEdit from './ImoneEdit';
+import { Link, Route } from 'react-router-dom';
+import { Button, Table } from 'semantic-ui-react';
+import RestoranasEdit from '../forms/RestoranasEdit';
 
 class RestoranasItem extends Component {
 
   render() {
     const { match: { url }, itemDel, items} = this.props;
+
     return (
       <div>
-        {/*<Route path={`${url}/edit/:itemId`} render={
-            props => <ImoneEdit {...items.find(item => item.id_IMONE.toString() === props.match.params.itemId)} />
-        }/>*/}
+        <Route path={`${url}/edit/:itemId`} render={
+            props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)}/>
+        }/>
       <div>
         <Table singleLine>
           <Table.Header>

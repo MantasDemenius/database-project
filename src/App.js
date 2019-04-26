@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 import Header from './components/includes/Header';
 import index from './components/pages/';
 import ImoneAdd from './components/forms/ImoneAdd';
-// import Restoranai from './components/pages/Restoranai';
+import RestoranasAdd from './components/forms/RestoranasAdd';
 import MainPath from './components/pages/MainPath';
 
 class App extends Component {
@@ -18,6 +18,7 @@ class App extends Component {
             <Route exact path='/' component={index}></Route>
             <Route path='/:mainPath' component={MainPath}></Route>
             <Route path='/Companies/add' component={ImoneAdd} />
+            <Route path='/Restaurants/add' component={RestoranasAdd} />
       </div>
     );
   }
