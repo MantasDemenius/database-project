@@ -10,8 +10,8 @@ function Header() {
           <h1><Link to="/">Duomenų bazių antrasis laboratorinis darbas</Link></h1>
         </Segment>
           <Menu fluid widths={7}>
-            <Menu.Item><Link to="/imone">Imonės</Link></Menu.Item>
-            <Menu.Item><Link to="/restoranas">Restoranai</Link></Menu.Item>
+            <Menu.Item><Link to="/imone" >Imonės</Link></Menu.Item>
+            <Menu.Item><Link to="/restoranas"  >Restoranai</Link></Menu.Item>
             <Menu.Item><Link to="/darbuotojas">Darbuotojai</Link></Menu.Item>
             <Menu.Item><Link to="/tiekejas">Tiekėjai</Link></Menu.Item>
             <Menu.Item><Link to="/atsiliepimas">Atsiliepimai</Link></Menu.Item>

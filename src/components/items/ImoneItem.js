@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom'
 import { Button, Table } from 'semantic-ui-react'
-import ImoneEdit from './ImoneEdit';
+import ImoneEdit from '../forms/ImoneEdit';
 
 class ImoneItem extends Component {
 
