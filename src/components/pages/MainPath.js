@@ -19,10 +19,12 @@ class MainPath extends Component {
     window.scrollTo(0, 0);
   }
 
+  //try to get items when the state is correct
   shouldComponentUpdate(nextProps, nextState){
     if(nextProps.match.url !== this.props.match.url){
       this.getItems(nextProps.match.url);
-      this.setState({url: nextProps.match.url});
+      this.setState({url: nextProps.match.url,
+                    errors: {}});
       return true;
     }else{
       if(nextState.url !== this.state.url){
@@ -32,18 +34,11 @@ class MainPath extends Component {
     return true;
   }
 
-  // shouldComponentUpdate(){
-  //   this.setState((props) => ({
-  //     url: this.props.match.url
-  //   }));
-  //   return true;
-
-  // }
-
   getItems = (url) => {
     axios.get(`${url}`)
     .then(response => {
       this.setState({items: response.data.results});
+      console.log(response.data.results);
     })
     .catch(error => console.log(error));
   }
@@ -81,7 +76,7 @@ class MainPath extends Component {
                   <RestoranasItem {...props} items={this.state.items} itemDel={this.itemDel}/>
           )} />)
         default:
-          return (<h1>this is no supposed to happen</h1>)
+          return (<h1>this is not supposed to happen</h1>)
         }
   }
 

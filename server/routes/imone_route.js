@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = (app, conn) => {
   const messageSuccess = "Irasas sekmingai istrintas";
-  
+
 
   app.get('/imone', (req, res) => {
     conn.query("SELECT * FROM imone", (err, data) => {
