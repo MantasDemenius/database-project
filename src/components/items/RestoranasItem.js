@@ -17,11 +17,11 @@ class RestoranasItem extends Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Id</Table.HeaderCell>
-              <Table.HeaderCell>Restorano pavadinimas</Table.HeaderCell>
-              <Table.HeaderCell>Imones pavadinimas</Table.HeaderCell>
-              <Table.HeaderCell>Adresas</Table.HeaderCell>
-              <Table.HeaderCell>Telefono numeris</Table.HeaderCell>
-              <Table.HeaderCell>Vadovo vardas</Table.HeaderCell>
+              <Table.HeaderCell>Restaurant's name</Table.HeaderCell>
+              <Table.HeaderCell>Company's name</Table.HeaderCell>
+              <Table.HeaderCell>Address</Table.HeaderCell>
+              <Table.HeaderCell>Phone</Table.HeaderCell>
+              <Table.HeaderCell>Manager's name</Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
             </Table.Row>
@@ -35,8 +35,8 @@ class RestoranasItem extends Component {
                   <Table.Cell>{item.Adresas}</Table.Cell>
                   <Table.Cell>{item.Telefono_numeris}</Table.Cell>
                   <Table.Cell>{item.Vadovo_vardas}</Table.Cell>
-                  <Table.Cell><Button primary><Link style={button} to={`${url}/edit/${item.id_RESTORANAS}`}>Redaguoti</Link></Button></Table.Cell>
-                  <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_RESTORANAS)}>Ištrinti</Button></Table.Cell>
+                  <Table.Cell><Button primary><Link style={button} to={`${url}/edit/${item.id_RESTORANAS}`}>Edit</Link></Button></Table.Cell>
+                  <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_RESTORANAS)}>Delete</Button></Table.Cell>
             </Table.Row>
             )}
           </Table.Body>

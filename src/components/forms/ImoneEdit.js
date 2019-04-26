@@ -55,13 +55,13 @@ class ImoneEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/imone/update`
+      url: `/Companies/update`
     })
     .then(response => {
       if(response.status === 200)
         // window.history.back();
         // window.location.reload();
-        window.location.replace("/imone");
+        window.location.replace("/Companies");
 
     })
     .catch(err => {
@@ -71,10 +71,10 @@ class ImoneEdit extends Component {
 
   validate = (data) => {
     const errors = {};
-    const errText = "Negali buti tuscias";
+    const errText = "Can't be empty";
     if(!this.state.data.Pavadinimas) errors.Pavadinimas = errText;
     if(!this.state.data.Adresas) errors.Adresas = errText;
-    if(!Validator.isMobilePhone(this.state.data.Telefono_numeris)) errors.Telefono_numeris = errText + " arba neteisingas telefono numeris";
+    if(!Validator.isMobilePhone(this.state.data.Telefono_numeris)) errors.Telefono_numeris = errText + " or a wrong number format";
 
     // const errText = "Privalomas laukelis";
     // if(!data.Pavadinimas) errors.Pavadinimas = errText;
@@ -105,7 +105,7 @@ class ImoneEdit extends Component {
             {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
             <Message
                 attached
-                header='Redagavimo forma'
+                header= {`Edit this item ${this.props.Pavadinimas}`}
               />
               <Form onSubmit={this.onSubmit}>
                 <Form.Field>
@@ -113,24 +113,24 @@ class ImoneEdit extends Component {
                   {data.id_IMONE}
                 </Form.Field>
                 <Form.Field error={!!errors.Pavadinimas}>
-                  <label>Pavadinimas</label>
+                  <label>Name</label>
                   <input name="Pavadinimas" placeholder={this.props.Pavadinimas} value={data.Pavadinimas}
                     onChange={this.onChange} />
                   {errors.Pavadinimas && <InLineError text={errors.Pavadinimas} />}
                 </Form.Field>
                 <Form.Field error={!!errors.Adresas}>
-                  <label>Adresas</label>
+                  <label>Address</label>
                   <input name="Adresas" placeholder={this.props.Adresas} value={data.Adresas}
                     onChange={this.onChange} />
                   {errors.Adresas && <InLineError text={errors.Adresas} />}
                 </Form.Field>
                 <Form.Field error={!!errors.Telefono_numeris}>
-                  <label>Telefono numeris</label>
+                  <label>Phone</label>
                   <input name="Telefono_numeris" placeholder={this.props.Telefono_numeris} value={data.Telefono_numeris}
                     onChange={this.onChange} />
                   {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}
                 </Form.Field>
-                <Button type='submit'>Redaguoti</Button>
+                <Button type='submit'>Edit</Button>
             </Form>
           </div>
         </div>

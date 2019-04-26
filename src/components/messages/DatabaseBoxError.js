@@ -4,7 +4,7 @@ import { Message } from 'semantic-ui-react'
 const DatabaseBoxError = ({ text }) => (
   <Message
     negative
-    header='Ivyko klaida'
+    header='Oops something went wrong!'
     content= { text }
     />
 )

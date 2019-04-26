@@ -67,16 +67,16 @@ class MainPath extends Component {
     const location = prop.location;
 
       switch(location){
-        case "/imone":
+        case "/Companies":
           return (<Route path={`${location}`} render={props => (
                   <ImoneItem {...props} items={this.state.items} itemDel={this.itemDel}/>
               )} />)
-        case "/restoranas":
+        case "/Restaurants":
           return (<Route path={`${location}`} render={props => (
                   <RestoranasItem {...props} items={this.state.items} itemDel={this.itemDel}/>
           )} />)
         default:
-          return (<h1>this is not supposed to happen</h1>)
+          return (<h1>This is an invalid route</h1>)
         }
   }
 
@@ -85,7 +85,7 @@ class MainPath extends Component {
     return(
       <React.Fragment>
         <div style={{padding: '5px'}}>
-          <Link to={`${url}/add`} style={{float: 'right'}}>Nauja sutartis</Link>
+          <Link to={`${url}/add`} style={{float: 'right'}}>Add new entry</Link>
         </div>
         {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
         {/*{errors.globalSucc && (<DatabaseBoxSuccess text={errors.globalSucc}/>)}*/}

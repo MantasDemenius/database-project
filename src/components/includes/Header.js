@@ -10,13 +10,13 @@ function Header() {
           <h1><Link to="/">Duomenų bazių antrasis laboratorinis darbas</Link></h1>
         </Segment>
           <Menu fluid widths={7}>
-            <Menu.Item><Link to="/imone" >Imonės</Link></Menu.Item>
-            <Menu.Item><Link to="/restoranas"  >Restoranai</Link></Menu.Item>
-            <Menu.Item><Link to="/darbuotojas">Darbuotojai</Link></Menu.Item>
-            <Menu.Item><Link to="/tiekejas">Tiekėjai</Link></Menu.Item>
-            <Menu.Item><Link to="/atsiliepimas">Atsiliepimai</Link></Menu.Item>
-            <Menu.Item><Link to="/klientas">Klientai</Link></Menu.Item>
-            <Menu.Item><Link to="/uzsakymas">Užsakymai</Link></Menu.Item>
+            <Menu.Item><Link to="/Companies" >Companies</Link></Menu.Item>
+            <Menu.Item><Link to="/Restaurants"  >Restaurants</Link></Menu.Item>
+            <Menu.Item><Link to="/Employees">Employees</Link></Menu.Item>
+            <Menu.Item><Link to="/Suppliers">Suppliers</Link></Menu.Item>
+            <Menu.Item><Link to="/Comments">Comments</Link></Menu.Item>
+            <Menu.Item><Link to="/Clients">Clients</Link></Menu.Item>
+            <Menu.Item><Link to="/Orders">Orders</Link></Menu.Item>
           </Menu>
       </header>
     );

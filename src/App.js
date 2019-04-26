@@ -17,7 +17,7 @@ class App extends Component {
         <Header />
             <Route exact path='/' component={index}></Route>
             <Route path='/:mainPath' component={MainPath}></Route>
-            <Route path='/imone/add' component={ImoneAdd} />
+            <Route path='/Companies/add' component={ImoneAdd} />
       </div>
     );
   }
