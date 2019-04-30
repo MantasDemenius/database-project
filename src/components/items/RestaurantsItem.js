@@ -6,11 +6,11 @@ import RestoranasEdit from '../forms/RestoranasEdit';
 class RestoranasItem extends Component {
 
   render() {
-    const { match: { url }, itemDel, items, secondaryItems} = this.props;
+    const { match: { url }, itemDel, items, CompanyItems, SupplierItems} = this.props;
     return (
       <div>
         <Route path={`${url}/edit/:itemId`} render={
-            props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)} dropdownItems={secondaryItems}/>
+            props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)} dropdownItems1={CompanyItems} dropdownItems2={SupplierItems} />
         }/>
       <div>
         <Table singleLine>

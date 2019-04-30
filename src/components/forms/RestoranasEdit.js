@@ -13,7 +13,6 @@ class RestoranasEdit extends Component {
     this.state = {
         data: {
           id_RESTORANAS: props.id_RESTORANAS || '',
-          id_IMONE: props.id_IMONE || '',
           Pavadinimas: props.Pavadinimas || '' ,
           IPavadinimas: props.IPavadinimas || '',
           Adresas: props.Adresas || '',
@@ -22,7 +21,8 @@ class RestoranasEdit extends Component {
           Vadovo_pavarde: props.Vadovo_pavarde || '',
           Vadovo_telefono_numeris: props.Vadovo_telefono_numeris || '',
           Vadovo_pastas: props.Vadovo_pastas || '',
-          dropdown: '' || props.id_IMONE
+          dropdown1: '' || props.id_IMONE,
+          dropdown2: '' || props.id_TIEKEJAS
         },
         errors: {}
 
@@ -34,16 +34,15 @@ class RestoranasEdit extends Component {
       this.setState({
         data: {
           id_RESTORANAS: this.props.id_RESTORANAS,
-          id_IMONE: this.props.id_IMONE,
           Pavadinimas: this.props.Pavadinimas,
-          IPavadinimas: this.props.IPavadinimas,
           Adresas: this.props.Adresas,
           Telefono_numeris: this.props.Telefono_numeris,
           Vadovo_vardas: this.props.Vadovo_vardas,
           Vadovo_pavarde: this.props.Vadovo_pavarde,
           Vadovo_telefono_numeris: this.props.Vadovo_telefono_numeris,
           Vadovo_pastas: this.props.Vadovo_pastas,
-          dropdown: this.props.id_IMONE
+          dropdown1: this.props.id_IMONE,
+          dropdown2: this.props.id_TIEKEJAS,
         }
       });
     }
@@ -131,8 +130,14 @@ class RestoranasEdit extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>{"Company"}</label>
-                    <select name="dropdown" value={data.dropdown} onChange={this.onChange}>
-                      {this.props.dropdownItems}
+                    <select name="dropdown1" value={data.dropdown1} onChange={this.onChange}>
+                      {this.props.dropdownItems1}
+                    </select>
+                </Form.Field>
+                <Form.Field>
+                  <label>{"Supplier"}</label>
+                    <select name="dropdown2" value={data.dropdown2} onChange={this.onChange}>
+                      {this.props.dropdownItems2}
                     </select>
                 </Form.Field>
                 <Form.Field error={!!errors.Adresas}>

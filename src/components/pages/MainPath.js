@@ -4,6 +4,7 @@ import { Route, Link } from 'react-router-dom';
 import CompaniesItem from '../items/CompaniesItem';
 import RestaurantsItem from '../items/RestaurantsItem';
 import SuppliersItem from '../items/SuppliersItem';
+import ClientsItem from '../items/ClientsItem';
 import DatabaseBoxError from '../messages/DatabaseBoxError';
 //import DatabaseBoxSuccess from '../messages/DatabaseBoxSuccess'
 
@@ -11,7 +12,8 @@ class MainPath extends Component {
 
   state = {
     items:[],
-    secondaryItems: [],
+    CompanyItems: [],
+    SupplierItems: [],
     errors: {},
     url: '' || this.props.match.url
   }
@@ -42,7 +44,14 @@ class MainPath extends Component {
     axios.get('/Companies')
     .then(response => {
       this.setState({
-        secondaryItems: response.data.results
+        CompanyItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+    axios.get('/Suppliers')
+    .then(response => {
+      this.setState({
+        SupplierItems: response.data.results
       });
     })
     .catch(error => console.log(error));
@@ -52,7 +61,7 @@ class MainPath extends Component {
     axios.get(`${url}`)
     .then(response => {
       this.setState({items: response.data.results});
-      console.log(this.state.items);
+      console.log("getitems: ", this.state.items);
     })
     .catch(error => console.log(error));
   }
@@ -79,7 +88,8 @@ class MainPath extends Component {
 
   RouteCheck = (prop) => {
     const location = prop.location;
-    const secondaryItems = prop.secondaryItems;
+    const CompanyItems = prop.CompanyItems;
+    const SupplierItems = prop.SupplierItems;
       switch(location){
         case "/Companies":
           return (<Route path={`${location}`} render={props => (
@@ -87,11 +97,15 @@ class MainPath extends Component {
               )} />)
         case "/Restaurants":
           return (<Route path={`${location}`} render={props => (
-                  <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel} secondaryItems={secondaryItems}/>
+                  <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel} CompanyItems={CompanyItems} SupplierItems={SupplierItems}/>
           )} />)
         case "/Suppliers":
           return (<Route path={`${location}`} render={props => (
                   <SuppliersItem {...props} items={this.state.items} itemDel={this.itemDel} />
+              )} />)
+        case "/Clients":
+          return (<Route path={`${location}`} render={props => (
+                  <ClientsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
         default:
           return (<h1>This is an invalid route</h1>)
@@ -100,9 +114,12 @@ class MainPath extends Component {
 
   render() {
     const { errors, url } = this.state;
-    let optionItems = this.state.secondaryItems.map((dropdownItem) =>
+    let optionItems = this.state.CompanyItems.map((dropdownItem) =>
          <option key={dropdownItem.id_IMONE} value={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
      );
+     let optionItems2 = this.state.SupplierItems.map((dropdownItem) =>
+          <option key={dropdownItem.id_TIEKEJAS} value={dropdownItem.id_TIEKEJAS}>{dropdownItem.Pavadinimas}</option>
+      );
     return(
       <React.Fragment>
         <div style={{padding: '5px'}}>
@@ -110,7 +127,7 @@ class MainPath extends Component {
         </div>
         {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
         {/*{errors.globalSucc && (<DatabaseBoxSuccess text={errors.globalSucc}/>)}*/}
-        <this.RouteCheck location={url} secondaryItems={optionItems}/>
+        <this.RouteCheck location={url} CompanyItems={optionItems} SupplierItems={optionItems2}/>
       </React.Fragment>
     );
   }

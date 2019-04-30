@@ -44,6 +44,7 @@ app.get('/', (req, res) => {
 require('./routes/CompaniesRoute')(app, conn);
 require('./routes/RestaurantsRoute')(app, conn);
 require('./routes/SuppliersRoute')(app, conn);
+require('./routes/ClientsRoute')(app, conn);
 
 // Handles any requests that don't match the ones above
 // app.get('*', (req,res) =>{
