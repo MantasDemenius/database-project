@@ -166,8 +166,8 @@ class RestoranasEdit extends Component {
                   {errors.Vadovo_telefono_numeris && <InLineError text={errors.Vadovo_telefono_numeris} />}
                 </Form.Field>
                 <Form.Field error={!!errors.Vadovo_pastas}>
-                  <label>Vadovo_pastas</label>
-                  <input name="Vadovo pastas" placeholder={this.props.Vadovo_pastas} value={data.Vadovo_pastas}
+                  <label>Vadovo pastas</label>
+                  <input name="Vadovo_pastas" placeholder={this.props.Vadovo_pastas} value={data.Vadovo_pastas}
                     onChange={this.onChange} />
                   {errors.Vadovo_pastas && <InLineError text={errors.Vadovo_pastas} />}
                 </Form.Field>

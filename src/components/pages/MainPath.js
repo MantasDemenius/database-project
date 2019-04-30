@@ -10,12 +10,15 @@ class MainPath extends Component {
 
   state = {
     items:[],
+    secondaryItems: [],
     errors: {},
     url: '' || this.props.match.url
   }
 
+
   componentDidMount(){
     this.getItems(this.props.match.url);
+    this.getDropdown();
     window.scrollTo(0, 0);
   }
 
@@ -34,11 +37,20 @@ class MainPath extends Component {
     return true;
   }
 
+  getDropdown = _ => {
+    axios.get('/Companies')
+    .then(response => {
+      this.setState({
+        secondaryItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+  }
+
   getItems = (url) => {
     axios.get(`${url}`)
     .then(response => {
       this.setState({items: response.data.results});
-      console.log(response.data.results);
     })
     .catch(error => console.log(error));
   }
@@ -65,15 +77,15 @@ class MainPath extends Component {
 
   RouteCheck = (prop) => {
     const location = prop.location;
-
+    const secondaryItems = prop.secondaryItems;
       switch(location){
         case "/Companies":
           return (<Route path={`${location}`} render={props => (
-                  <ImoneItem {...props} items={this.state.items} itemDel={this.itemDel}/>
+                  <ImoneItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
         case "/Restaurants":
           return (<Route path={`${location}`} render={props => (
-                  <RestoranasItem {...props} items={this.state.items} itemDel={this.itemDel}/>
+                  <RestoranasItem {...props} items={this.state.items} itemDel={this.itemDel} secondaryItems={secondaryItems}/>
           )} />)
         default:
           return (<h1>This is an invalid route</h1>)
@@ -82,6 +94,9 @@ class MainPath extends Component {
 
   render() {
     const { errors, url } = this.state;
+    let optionItems = this.state.secondaryItems.map((dropdownItem) =>
+         <option key={dropdownItem.id_IMONE} value={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
+     );
     return(
       <React.Fragment>
         <div style={{padding: '5px'}}>
@@ -89,7 +104,7 @@ class MainPath extends Component {
         </div>
         {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
         {/*{errors.globalSucc && (<DatabaseBoxSuccess text={errors.globalSucc}/>)}*/}
-        <this.RouteCheck location={url}/>
+        <this.RouteCheck location={url} secondaryItems={optionItems}/>
       </React.Fragment>
     );
   }

@@ -2,55 +2,15 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Button, Table } from 'semantic-ui-react';
 import RestoranasEdit from '../forms/RestoranasEdit';
-import axios from 'axios';
 
 class RestoranasItem extends Component {
 
-  state = {
-    CompanyItems: []
-  }
-
-  componentDidMount(){
-    this.getDropdown();
-  }
-  getDropdown = _ => {
-    axios.get('/Companies')
-    .then(response => {
-      this.setState({
-        CompanyItems: response.data.results
-      });
-        console.log(this.state.CompanyItems);
-    })
-    .catch(error => console.log(error));
-  }
-
-  // getOptions = (prop) => {
-  //   console.log(prop.selectedID);
-  //   console.log(prop.selectedName);
-  //   console.log(this.props.)
-  //   console.log(this.state.CompanyItems);
-  //   let optionItems = this.state.CompanyItems.map((dropdownItem) => {
-  //     let select = "";
-  //     if(prop.selectedID === dropdownItem.id_IMONE){
-  //       select = "selected";
-  //     }
-  //       return <h1>bruh</h1>
-  //   });
-  // }
-//return (<option key={dropdownItem.id_IMONE}>{dropdownItem.IPavadinimas}</option>)
-// <this.getOptions selectedID={data.id_IMONE} selectedName={data.IPavadinimas}/>
-
-
   render() {
-    const { match: { url }, itemDel, items} = this.props;
-
-    let optionItems = this.state.CompanyItems.map((dropdownItem) =>
-          <option key={dropdownItem.id_IMONE} value={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
-      );
+    const { match: { url }, itemDel, items, secondaryItems} = this.props;
     return (
       <div>
         <Route path={`${url}/edit/:itemId`} render={
-            props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)} dropdownItems={optionItems}/>
+            props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)} dropdownItems={secondaryItems}/>
         }/>
       <div>
         <Table singleLine>

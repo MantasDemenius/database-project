@@ -65,16 +65,32 @@ module.exports = (app, conn) => {
     });
   });
 
-  // app.post('/Restaurants/add', (req, res) => {
-  //   console.log(req.body);
-  //   var sql = "INSERT INTO imone (Pavadinimas, Adresas, Telefono_numeris) VALUES (?, ?, ?)";
-  //   conn.query(sql, [req.body.Pavadinimas, req.body.Adresas, req.body.Telefono_numeris], (err, data) => {
-  //     if (err) {
-  //       res.status(500).json({ errors: {globalErr: err } });
-  //     }
-  //     else{
-  //       res.sendStatus(200);
-  //     }
-  //   });
-  // });
+  app.post('/Restaurants/add', (req, res) => {
+    var sql = "INSERT INTO restoranas (\
+      fk_IMONEid_IMONE, \
+      Pavadinimas, \
+      Adresas, \
+      Telefono_numeris, \
+      Vadovo_vardas, \
+      Vadovo_pavarde, \
+      Vadovo_telefono_numeris, \
+      Vadovo_pastas\
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    conn.query(sql, [
+    req.body.dropdown,
+    req.body.Pavadinimas,
+    req.body.Adresas,
+    req.body.Telefono_numeris,
+    req.body.Vadovo_vardas,
+    req.body.Vadovo_pavarde,
+    req.body.Vadovo_telefono_numeris,
+    req.body.Vadovo_pastas], (err, data) => {
+      if (err) {
+        res.status(500).json({ errors: {globalErr: err } });
+      }
+      else{
+        res.sendStatus(200);
+      }
+    });
+  });
 }
