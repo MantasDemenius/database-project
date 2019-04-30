@@ -5,6 +5,7 @@ import CompaniesItem from '../items/CompaniesItem';
 import RestaurantsItem from '../items/RestaurantsItem';
 import SuppliersItem from '../items/SuppliersItem';
 import ClientsItem from '../items/ClientsItem';
+import CommentsItem from '../items/CommentsItem';
 import DatabaseBoxError from '../messages/DatabaseBoxError';
 //import DatabaseBoxSuccess from '../messages/DatabaseBoxSuccess'
 
@@ -14,6 +15,7 @@ class MainPath extends Component {
     items:[],
     CompanyItems: [],
     SupplierItems: [],
+
     errors: {},
     url: '' || this.props.match.url
   }
@@ -107,8 +109,12 @@ class MainPath extends Component {
           return (<Route path={`${location}`} render={props => (
                   <ClientsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
+        case "/Comments":
+          return (<Route path={`${location}`} render={props => (
+                  <CommentsItem {...props} items={this.state.items} itemDel={this.itemDel} />
+              )} />)
         default:
-          return (<h1>This is an invalid route</h1>)
+          return (<h1>To be continued</h1>)
         }
   }
 

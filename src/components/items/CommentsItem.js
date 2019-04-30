@@ -3,14 +3,15 @@ import { Link, Route } from 'react-router-dom';
 import { Button, Table } from 'semantic-ui-react';
 import RestoranasEdit from '../forms/RestoranasEdit';
 
-class RestoranasItem extends Component {
+class CommentsItem extends Component {
 
   render() {
     const { match: { url }, itemDel, items, CompanyItems, SupplierItems} = this.props;
     return (
       <div>
         <Route path={`${url}/edit/:itemId`} render={
-            props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)} dropdownItems1={CompanyItems} dropdownItems2={SupplierItems} />
+            props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)}
+            dropdownItems1={CompanyItems} dropdownItems2={SupplierItems} />
         }/>
       <div>
         <Table singleLine>
@@ -55,4 +56,4 @@ const button = {
 }
 
 
-export default RestoranasItem
+export default CommentsItem

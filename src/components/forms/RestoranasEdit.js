@@ -134,12 +134,12 @@ class RestoranasEdit extends Component {
                       {this.props.dropdownItems1}
                     </select>
                 </Form.Field>
-                <Form.Field>
+                {/*<Form.Field>
                   <label>{"Supplier"}</label>
                     <select name="dropdown2" value={data.dropdown2} onChange={this.onChange}>
                       {this.props.dropdownItems2}
                     </select>
-                </Form.Field>
+                </Form.Field>*/}
                 <Form.Field error={!!errors.Adresas}>
                   <label>Address</label>
                   <input name="Adresas" placeholder={this.props.Adresas} value={data.Adresas}
