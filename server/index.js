@@ -12,7 +12,7 @@ const conn = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
-  database : 'restoranas_v3'
+  database : 'restoranas_v4'
 });
 
 //var conn = mysql.createConnection(process.env.JAWSDB_URL);
@@ -41,8 +41,9 @@ app.get('/', (req, res) => {
   res.send("Go to /imones to see imones table")
 });
 
-require('./routes/imone_route')(app, conn);
-require('./routes/restoranas_route')(app, conn);
+require('./routes/CompaniesRoute')(app, conn);
+require('./routes/RestaurantsRoute')(app, conn);
+require('./routes/SuppliersRoute')(app, conn);
 
 // Handles any requests that don't match the ones above
 // app.get('*', (req,res) =>{

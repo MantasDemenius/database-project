@@ -37,7 +37,6 @@ module.exports = (app, conn) => {
   });
 
   app.post('/Companies/add', (req, res) => {
-    console.log(req.body);
     var sql = "INSERT INTO imone (Pavadinimas, Adresas, Telefono_numeris) VALUES (?, ?, ?)";
     conn.query(sql, [req.body.Pavadinimas, req.body.Adresas, req.body.Telefono_numeris], (err, data) => {
       if (err) {

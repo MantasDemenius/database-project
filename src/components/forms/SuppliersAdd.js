@@ -7,27 +7,25 @@ import Validator from "validator";
 import DatabaseBoxError from '../messages/DatabaseBoxError'
 
 
-class RestoranasAdd extends Component {
+class SuppliersAdd extends Component {
 
   state = {
     data: {
-      id_RESTORANAS: '',
+      id_TIEKEJAS: '',
       Pavadinimas:  '' ,
       Adresas: '',
       Telefono_numeris:  '',
+      Pastas: '',
       Vadovo_vardas:  '',
       Vadovo_pavarde: '',
       Vadovo_telefono_numeris:  '',
-      Vadovo_pastas: '',
-      dropdown: '1'
+      Vadovo_pastas: ''
     },
     errors: {},
-    secondaryItems: []
   };
 
   componentDidMount() {
     document.getElementById('myModal').style.display = "block";
-    this.getDropdown();
   }
 
   onChange = e => this.setState({
@@ -47,8 +45,9 @@ class RestoranasAdd extends Component {
     const errors = {};
     const errText = "Can't be empty";
     if(!this.state.data.Pavadinimas) errors.Pavadinimas = errText;
-    if(!this.state.data.Adresas) errors.Adresas = errText;
     if(!Validator.isMobilePhone(this.state.data.Telefono_numeris)) errors.Telefono_numeris = errText + " or a wrong number format";
+    if(!this.state.data.Adresas) errors.Adresas = errText;
+    if(!Validator.isEmail(this.state.data.Pastas)) errors.Pastas = errText + " or an invalid email";
     if(!this.state.data.Vadovo_vardas) errors.Vadovo_vardas = errText;
     if(!this.state.data.Vadovo_pavarde) errors.Vadovo_pavarde = errText;
     if(!Validator.isMobilePhone(this.state.data.Vadovo_telefono_numeris)) errors.Vadovo_telefono_numeris = errText + " or a wrong number format";
@@ -64,14 +63,13 @@ class RestoranasAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Restaurants/add`
+      url: `/Suppliers/add`
     })
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/Restaurants`);
+        this.props.history.push(`/Suppliers`);
         window.location.reload();
-
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors });
@@ -80,25 +78,11 @@ class RestoranasAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Restaurants`);
-  }
-
-  getDropdown = _ => {
-    axios.get('/Companies')
-    .then(response => {
-      this.setState({
-        secondaryItems: response.data.results
-      });
-      console.log(this.state.secondaryItems);
-    })
-    .catch(error => console.log(error));
+    this.props.history.push(`/Suppliers`);
   }
 
   render () {
       const { errors, data } = this.state;
-      let dropdownItems = this.state.secondaryItems.map((dropdownItem) =>
-           <option key={dropdownItem.id_IMONE} value={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
-       );
       return (
         <div id="myModal" className="modal">
             <div className="modalContent">
@@ -106,20 +90,14 @@ class RestoranasAdd extends Component {
               {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
               <Message
                   attached
-                  header= "Add a new restaurant"
+                  header= "Add new supplier"
                 />
                 <Form onSubmit={this.onSubmit}>
                   <Form.Field error={!!errors.Pavadinimas}>
-                    <label>{"Restaurant's Name*"}</label>
+                    <label>{"Supplier's Name*"}</label>
                     <input name="Pavadinimas" placeholder={this.props.Pavadinimas} value={data.Pavadinimas}
                       onChange={this.onChange} />
                     {errors.Pavadinimas && <InLineError text={errors.Pavadinimas} />}
-                  </Form.Field>
-                  <Form.Field>
-                    <label>{"Company*"}</label>
-                      <select name="dropdown" value={data.dropdown} onChange={this.onChange}>
-                        {dropdownItems}
-                      </select>
                   </Form.Field>
                   <Form.Field error={!!errors.Adresas}>
                     <label>Address*</label>
@@ -132,6 +110,12 @@ class RestoranasAdd extends Component {
                     <input name="Telefono_numeris" placeholder={this.props.Telefono_numeris} value={data.Telefono_numeris}
                       onChange={this.onChange} />
                     {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}
+                  </Form.Field>
+                  <Form.Field error={!!errors.Pastas}>
+                    <label>Email*</label>
+                    <input name="Pastas" placeholder={this.props.Pastas} value={data.Pastas}
+                      onChange={this.onChange} />
+                    {errors.Pastas && <InLineError text={errors.Pastas} />}
                   </Form.Field>
                   <Form.Field error={!!errors.Vadovo_vardas}>
                     <label>{"Manager's name*"}</label>
@@ -165,4 +149,4 @@ class RestoranasAdd extends Component {
   }
 }
 
-export default RestoranasAdd;
+export default SuppliersAdd;

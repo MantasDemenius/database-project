@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
-import ImoneItem from '../items/ImoneItem';
-import RestoranasItem from '../items/RestoranasItem';
+import CompaniesItem from '../items/CompaniesItem';
+import RestaurantsItem from '../items/RestaurantsItem';
+import SuppliersItem from '../items/SuppliersItem';
 import DatabaseBoxError from '../messages/DatabaseBoxError';
 //import DatabaseBoxSuccess from '../messages/DatabaseBoxSuccess'
 
@@ -51,6 +52,7 @@ class MainPath extends Component {
     axios.get(`${url}`)
     .then(response => {
       this.setState({items: response.data.results});
+      console.log(this.state.items);
     })
     .catch(error => console.log(error));
   }
@@ -81,12 +83,16 @@ class MainPath extends Component {
       switch(location){
         case "/Companies":
           return (<Route path={`${location}`} render={props => (
-                  <ImoneItem {...props} items={this.state.items} itemDel={this.itemDel} />
+                  <CompaniesItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
         case "/Restaurants":
           return (<Route path={`${location}`} render={props => (
-                  <RestoranasItem {...props} items={this.state.items} itemDel={this.itemDel} secondaryItems={secondaryItems}/>
+                  <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel} secondaryItems={secondaryItems}/>
           )} />)
+        case "/Suppliers":
+          return (<Route path={`${location}`} render={props => (
+                  <SuppliersItem {...props} items={this.state.items} itemDel={this.itemDel} />
+              )} />)
         default:
           return (<h1>This is an invalid route</h1>)
         }

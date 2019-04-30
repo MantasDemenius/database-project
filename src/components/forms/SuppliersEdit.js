@@ -6,44 +6,39 @@ import '../../style/modalContentStyle.css';
 import Validator from 'validator';
 import DatabaseBoxError from '../messages/DatabaseBoxError'
 
-class RestoranasEdit extends Component {
+class SuppliersEdit extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
         data: {
-          id_RESTORANAS: props.id_RESTORANAS || '',
-          id_IMONE: props.id_IMONE || '',
+          id_TIEKEJAS: props.id_TIEKEJAS || '',
           Pavadinimas: props.Pavadinimas || '' ,
-          IPavadinimas: props.IPavadinimas || '',
-          Adresas: props.Adresas || '',
           Telefono_numeris: props.Telefono_numeris || '',
+          Adresas: props.Adresas || '',
+          Pastas: props.Pastas || '',
           Vadovo_vardas: props.Vadovo_vardas || '',
           Vadovo_pavarde: props.Vadovo_pavarde || '',
           Vadovo_telefono_numeris: props.Vadovo_telefono_numeris || '',
-          Vadovo_pastas: props.Vadovo_pastas || '',
-          dropdown: '' || props.id_IMONE
+          Vadovo_pastas: props.Vadovo_pastas || ''
         },
         errors: {}
-
       };
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.id_RESTORANAS !== prevProps.id_RESTORANAS && prevProps.id_RESTORANAS !== undefined){
+    if(this.props.id_IMONE !== prevProps.id_IMONE && prevProps.id_IMONE !== undefined){
       this.setState({
         data: {
-          id_RESTORANAS: this.props.id_RESTORANAS,
-          id_IMONE: this.props.id_IMONE,
+          id_TIEKEJAS: this.props.id_TIEKEJAS,
           Pavadinimas: this.props.Pavadinimas,
-          IPavadinimas: this.props.IPavadinimas,
-          Adresas: this.props.Adresas,
           Telefono_numeris: this.props.Telefono_numeris,
+          Adresas: this.props.Adresas,
+          Pastas: this.props.Pastas,
           Vadovo_vardas: this.props.Vadovo_vardas,
           Vadovo_pavarde: this.props.Vadovo_pavarde,
           Vadovo_telefono_numeris: this.props.Vadovo_telefono_numeris,
-          Vadovo_pastas: this.props.Vadovo_pastas,
-          dropdown: this.props.id_IMONE
+          Vadovo_pastas: this.props.Vadovo_pastas
         }
       });
     }
@@ -59,8 +54,8 @@ class RestoranasEdit extends Component {
     this.setState({errors});
     if(Object.keys(errors).length === 0) {
       this.updateData(this.state.data);
-    }
   }
+}
 
   updateData = (data) => {
     axios({
@@ -70,13 +65,14 @@ class RestoranasEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Restaurants/edit`
+      url: `/Suppliers/edit`
     })
     .then(response => {
       if(response.status === 200)
         // window.history.back();
         // window.location.reload();
-        window.location.replace("/Restaurants");
+        window.location.replace("/Suppliers");
+
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors });
@@ -87,8 +83,9 @@ class RestoranasEdit extends Component {
     const errors = {};
     const errText = "Can't be empty";
     if(!this.state.data.Pavadinimas) errors.Pavadinimas = errText;
-    if(!this.state.data.Adresas) errors.Adresas = errText;
     if(!Validator.isMobilePhone(this.state.data.Telefono_numeris)) errors.Telefono_numeris = errText + " or a wrong number format";
+    if(!this.state.data.Adresas) errors.Adresas = errText;
+    if(!Validator.isEmail(this.state.data.Pastas)) errors.Pastas = errText + " or an invalid email";
     if(!this.state.data.Vadovo_vardas) errors.Vadovo_vardas = errText;
     if(!this.state.data.Vadovo_pavarde) errors.Vadovo_pavarde = errText;
     if(!Validator.isMobilePhone(this.state.data.Vadovo_telefono_numeris)) errors.Vadovo_telefono_numeris = errText + " or a wrong number format";
@@ -108,7 +105,6 @@ class RestoranasEdit extends Component {
 
   render () {
     const { data, errors } = this.state;
-
     return (
       <div id="myModal" className="modal">
           <div className="modalContent">
@@ -116,24 +112,18 @@ class RestoranasEdit extends Component {
             {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
             <Message
                 attached
-                header= "Edit the restaurant"
+                header= "Edit the supplier"
               />
               <Form onSubmit={this.onSubmit}>
                 <Form.Field>
                   <label>ID</label>
-                  {data.id_RESTORANAS}
+                  {data.id_TIEKEJAS}
                 </Form.Field>
                 <Form.Field error={!!errors.Pavadinimas}>
-                  <label>{"Restaurant's Name"}</label>
+                  <label>{"Supplier's Name"}</label>
                   <input name="Pavadinimas" placeholder={this.props.Pavadinimas} value={data.Pavadinimas}
                     onChange={this.onChange} />
                   {errors.Pavadinimas && <InLineError text={errors.Pavadinimas} />}
-                </Form.Field>
-                <Form.Field>
-                  <label>{"Company"}</label>
-                    <select name="dropdown" value={data.dropdown} onChange={this.onChange}>
-                      {this.props.dropdownItems}
-                    </select>
                 </Form.Field>
                 <Form.Field error={!!errors.Adresas}>
                   <label>Address</label>
@@ -146,6 +136,12 @@ class RestoranasEdit extends Component {
                   <input name="Telefono_numeris" placeholder={this.props.Telefono_numeris} value={data.Telefono_numeris}
                     onChange={this.onChange} />
                   {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}
+                </Form.Field>
+                <Form.Field error={!!errors.Pastas}>
+                  <label>Email</label>
+                  <input name="Pastas" placeholder={this.props.Pastas} value={data.Pastas}
+                    onChange={this.onChange} />
+                  {errors.Pastsa && <InLineError text={errors.Pastas} />}
                 </Form.Field>
                 <Form.Field error={!!errors.Vadovo_vardas}>
                   <label>{"Manager's name"}</label>
@@ -179,4 +175,4 @@ class RestoranasEdit extends Component {
   }
 }
 
-export default RestoranasEdit;
+export default SuppliersEdit;
