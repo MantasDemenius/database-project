@@ -23,18 +23,6 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.get('/Restaurants/edit/dropdown', (req, res) => {
-    var sql = "SELECT \
-    id_IMONE, \
-    Pavadinimas \
-    FROM imone";
-    conn.query(sql, (err, data) => {
-      if (err) throw err;
-      res.json({results: data});
-    });
-  });
-
-
   app.post('/Restaurants/del', (req, res) => {
     let id = req.query.id;
     conn.query("Delete FROM restoranas WHERE id_RESTORANAS = " + mysql.escape(id), (err, data) => {
@@ -48,7 +36,9 @@ module.exports = (app, conn) => {
   });
 
   app.post('/Restaurants/edit', (req, res) => {
-    var sql = "UPDATE restoranas SET Pavadinimas = ?, \
+    var sql = "UPDATE restoranas SET \
+    fk_IMONEid_IMONE = ?, \
+    Pavadinimas = ?, \
     Adresas = ?, \
     Telefono_numeris = ?, \
     Vadovo_vardas = ?, \
@@ -56,7 +46,9 @@ module.exports = (app, conn) => {
     Vadovo_telefono_numeris = ?, \
     Vadovo_pastas = ? \
     WHERE id_RESTORANAS = ?";
-    conn.query(sql, [req.body.Pavadinimas,
+    conn.query(sql, [
+      req.body.dropdown,
+      req.body.Pavadinimas,
       req.body.Adresas,
       req.body.Telefono_numeris,
       req.body.Vadovo_vardas,

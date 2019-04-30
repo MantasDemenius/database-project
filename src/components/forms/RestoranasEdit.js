@@ -21,10 +21,11 @@ class RestoranasEdit extends Component {
           Vadovo_vardas: props.Vadovo_vardas || '',
           Vadovo_pavarde: props.Vadovo_pavarde || '',
           Vadovo_telefono_numeris: props.Vadovo_telefono_numeris || '',
-          Vadovo_pastas: props.Vadovo_pastas || ''
+          Vadovo_pastas: props.Vadovo_pastas || '',
+          dropdown: '' || props.id_IMONE
         },
-        errors: {},
-        CompanyItems: {}
+        errors: {}
+
       };
   }
 
@@ -41,7 +42,8 @@ class RestoranasEdit extends Component {
           Vadovo_vardas: this.props.Vadovo_vardas,
           Vadovo_pavarde: this.props.Vadovo_pavarde,
           Vadovo_telefono_numeris: this.props.Vadovo_telefono_numeris,
-          Vadovo_pastas: this.props.Vadovo_pastas
+          Vadovo_pastas: this.props.Vadovo_pastas,
+          dropdown: this.props.id_IMONE
         }
       });
     }
@@ -96,48 +98,17 @@ class RestoranasEdit extends Component {
 
   componentDidMount() {
     document.getElementById('myModal').style.display = "block";
-    this.getDropdown();
   }
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    //this.state.history.push(`/imones`);
     window.history.back();
-    //window.location.reload();
-    //window.location.replace("/imones");
   }
 
-  getDropdown = _ => {
-    axios.get('/Restaurants/edit/dropdown')
-    .then(response => {
-      this.setState({
-        CompanyItems: response.data.results
-      });
-        console.log(this.state.CompanyItems);
-    })
-    .catch(error => console.log(error));
-  }
 
-  // getOptions = (prop) => {
-  //   console.log(prop.selectedID);
-  //   console.log(prop.selectedName);
-  //   console.log(this.props.)
-  //   console.log(this.state.CompanyItems);
-  //   let optionItems = this.state.CompanyItems.map((dropdownItem) => {
-  //     let select = "";
-  //     if(prop.selectedID === dropdownItem.id_IMONE){
-  //       select = "selected";
-  //     }
-  //       return <h1>bruh</h1>
-  //   });
-  // }
-//return (<option key={dropdownItem.id_IMONE}>{dropdownItem.IPavadinimas}</option>)
-// <this.getOptions selectedID={data.id_IMONE} selectedName={data.IPavadinimas}/>
   render () {
-    const { data, errors, CompanyItems } = this.state;
-    let optionItems = CompanyItems.map((dropdownItem) => {
-          <option key={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
-      });
+    const { data, errors } = this.state;
+
     return (
       <div id="myModal" className="modal">
           <div className="modalContent">
@@ -160,8 +131,8 @@ class RestoranasEdit extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>{"Company"}</label>
-                    <select>
-                      {optionItems}
+                    <select name="dropdown" value={data.dropdown} onChange={this.onChange}>
+                      {this.props.dropdownItems}
                     </select>
                 </Form.Field>
                 <Form.Field error={!!errors.Adresas}>
