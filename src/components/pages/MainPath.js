@@ -15,7 +15,7 @@ class MainPath extends Component {
     items:[],
     CompanyItems: [],
     SupplierItems: [],
-
+    CommentItems: [],
     errors: {},
     url: '' || this.props.match.url
   }
@@ -23,7 +23,10 @@ class MainPath extends Component {
 
   componentDidMount(){
     this.getItems(this.props.match.url);
-    this.getDropdown();
+    if(this.state.url === "/Restaurants"){
+      this.getDropdown();
+    }
+
     window.scrollTo(0, 0);
   }
 
@@ -54,6 +57,14 @@ class MainPath extends Component {
     .then(response => {
       this.setState({
         SupplierItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+    axios.get('/Restaurants/comments')
+    .then(response => {
+      console.log("restaurant:", response.data.results);
+      this.setState({
+        CommentItems: response.data.results
       });
     })
     .catch(error => console.log(error));
@@ -92,6 +103,7 @@ class MainPath extends Component {
     const location = prop.location;
     const CompanyItems = prop.CompanyItems;
     const SupplierItems = prop.SupplierItems;
+    const CommentItems = prop.CommentItems;
       switch(location){
         case "/Companies":
           return (<Route path={`${location}`} render={props => (
@@ -99,7 +111,7 @@ class MainPath extends Component {
               )} />)
         case "/Restaurants":
           return (<Route path={`${location}`} render={props => (
-                  <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel} CompanyItems={CompanyItems} SupplierItems={SupplierItems}/>
+                  <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel} CompanyItems={CompanyItems} SupplierItems={SupplierItems} CommentItems={CommentItems}/>
           )} />)
         case "/Suppliers":
           return (<Route path={`${location}`} render={props => (
@@ -108,10 +120,6 @@ class MainPath extends Component {
         case "/Clients":
           return (<Route path={`${location}`} render={props => (
                   <ClientsItem {...props} items={this.state.items} itemDel={this.itemDel} />
-              )} />)
-        case "/Comments":
-          return (<Route path={`${location}`} render={props => (
-                  <CommentsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
         default:
           return (<h1>To be continued</h1>)
