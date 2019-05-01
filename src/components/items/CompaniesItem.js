@@ -13,7 +13,7 @@ class ImoneItem extends Component {
             props => <ImoneEdit {...items.find(item => item.id_IMONE.toString() === props.match.params.itemId)} />
         }/>
       <div>
-        <Table singleLine>
+        <Table striped singleLine>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Id</Table.HeaderCell>

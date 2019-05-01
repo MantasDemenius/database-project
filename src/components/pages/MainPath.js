@@ -13,9 +13,6 @@ class MainPath extends Component {
 
   state = {
     items:[],
-    CompanyItems: [],
-    SupplierItems: [],
-    CommentItems: [],
     errors: {},
     url: '' || this.props.match.url
   }
@@ -23,10 +20,6 @@ class MainPath extends Component {
 
   componentDidMount(){
     this.getItems(this.props.match.url);
-    if(this.state.url === "/Restaurants"){
-      this.getDropdown();
-    }
-
     window.scrollTo(0, 0);
   }
 
@@ -45,30 +38,6 @@ class MainPath extends Component {
     return true;
   }
 
-  getDropdown = _ => {
-    axios.get('/Companies')
-    .then(response => {
-      this.setState({
-        CompanyItems: response.data.results
-      });
-    })
-    .catch(error => console.log(error));
-    axios.get('/Suppliers')
-    .then(response => {
-      this.setState({
-        SupplierItems: response.data.results
-      });
-    })
-    .catch(error => console.log(error));
-    axios.get('/Restaurants/comments')
-    .then(response => {
-      console.log("restaurant:", response.data.results);
-      this.setState({
-        CommentItems: response.data.results
-      });
-    })
-    .catch(error => console.log(error));
-  }
 
   getItems = (url) => {
     axios.get(`${url}`)
@@ -101,9 +70,6 @@ class MainPath extends Component {
 
   RouteCheck = (prop) => {
     const location = prop.location;
-    const CompanyItems = prop.CompanyItems;
-    const SupplierItems = prop.SupplierItems;
-    const CommentItems = prop.CommentItems;
       switch(location){
         case "/Companies":
           return (<Route path={`${location}`} render={props => (
@@ -111,7 +77,7 @@ class MainPath extends Component {
               )} />)
         case "/Restaurants":
           return (<Route path={`${location}`} render={props => (
-                  <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel} CompanyItems={CompanyItems} SupplierItems={SupplierItems} CommentItems={CommentItems}/>
+                  <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel}/>
           )} />)
         case "/Suppliers":
           return (<Route path={`${location}`} render={props => (
@@ -121,6 +87,10 @@ class MainPath extends Component {
           return (<Route path={`${location}`} render={props => (
                   <ClientsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
+        case "/Comments":
+          return (<Route path={`${location}`} render={props => (
+                  <CommentsItem {...props} items={this.state.items} itemDel={this.itemDel} />
+              )} />)
         default:
           return (<h1>To be continued</h1>)
         }
@@ -128,12 +98,6 @@ class MainPath extends Component {
 
   render() {
     const { errors, url } = this.state;
-    let optionItems = this.state.CompanyItems.map((dropdownItem) =>
-         <option key={dropdownItem.id_IMONE} value={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
-     );
-     let optionItems2 = this.state.SupplierItems.map((dropdownItem) =>
-          <option key={dropdownItem.id_TIEKEJAS} value={dropdownItem.id_TIEKEJAS}>{dropdownItem.Pavadinimas}</option>
-      );
     return(
       <React.Fragment>
         <div style={{padding: '5px'}}>
@@ -141,7 +105,7 @@ class MainPath extends Component {
         </div>
         {errors.globalErr && (<DatabaseBoxError text={errors.globalErr.sqlMessage}/>)}
         {/*{errors.globalSucc && (<DatabaseBoxSuccess text={errors.globalSucc}/>)}*/}
-        <this.RouteCheck location={url} CompanyItems={optionItems} SupplierItems={optionItems2}/>
+        <this.RouteCheck location={url}/>
       </React.Fragment>
     );
   }

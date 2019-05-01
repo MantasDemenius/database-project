@@ -13,7 +13,7 @@ class ClientsItem extends Component {
             props => <ClientsEdit {...items.find(item => item.id_KLIENTAS.toString() === props.match.params.itemId)} />
         }/>
       <div>
-        <Table singleLine>
+        <Table striped singleLine>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Id</Table.HeaderCell>

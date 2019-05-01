@@ -13,7 +13,7 @@ class SuppliersItem extends Component {
             props => <SuppliersEdit {...items.find(item => item.id_TIEKEJAS.toString() === props.match.params.itemId)} />
         }/>
       <div>
-        <Table singleLine>
+        <Table striped singleLine>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Id</Table.HeaderCell>

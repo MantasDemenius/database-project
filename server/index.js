@@ -12,7 +12,8 @@ const conn = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
-  database : 'restoranas_v4'
+  database : 'restoranas_v4',
+  dateStrings: 'date'
 });
 
 //var conn = mysql.createConnection(process.env.JAWSDB_URL);
@@ -45,6 +46,7 @@ require('./routes/CompaniesRoute')(app, conn);
 require('./routes/RestaurantsRoute')(app, conn);
 require('./routes/SuppliersRoute')(app, conn);
 require('./routes/ClientsRoute')(app, conn);
+require('./routes/CommentsRoute')(app, conn);
 
 // Handles any requests that don't match the ones above
 // app.get('*', (req,res) =>{

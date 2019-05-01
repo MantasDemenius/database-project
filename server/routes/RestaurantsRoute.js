@@ -94,27 +94,4 @@ module.exports = (app, conn) => {
       }
     });
   });
-
-
-  app.get('/Restaurants/comments', (req, res) => {
-    var sql = "SELECT atsiliepimas.id_ATSILIEPIMAS, \
-    restoranas.Pavadinimas as RPavadinimas, \
-    restoranas.id_RESTORANAS, \
-    klientas.id_KLIENTAS, \
-    klientas.Vardas as KVardas, \
-    atsiliepimas.Data, \
-    atsiliepimas.Komentaras, \
-    atsiliepimas.Ivertinimas \
-    FROM atsiliepimas \
-    LEFT JOIN restoranas ON atsiliepimas.fk_RESTORANASid_RESTORANAS = restoranas.id_RESTORANAS \
-    LEFT JOIN klientas ON atsiliepimas.fk_KLIENTASid_KLIENTAS = klientas.id_KLIENTAS";
-    conn.query(sql, (err, data) => {
-      if (err) {
-        res.status(500).json({ errors: {globalErr: err } });
-      }
-      else{
-        res.status(200).json({results: data});
-      }
-    });
-  });
 }

@@ -1,25 +1,55 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { Button, Table, Icon } from 'semantic-ui-react';
+import axios from 'axios';
+import { Button, Table} from 'semantic-ui-react';
 import RestoranasEdit from '../forms/RestoranasEdit';
-import CommentsItem from './CommentsItem';
 // {...props} ClientItems={ClientItems} CommentItems={CommentItems}
 class RestoranasItem extends Component {
 
+  state = {
+    CompanyItems:[],
+    SupplierItems:[]
+  }
+
+  componentDidMount(){
+    this.getDropdown();
+  }
+
+  getDropdown = _ => {
+    axios.get('/Companies')
+    .then(response => {
+      this.setState({
+        CompanyItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+    axios.get('/Suppliers')
+    .then(response => {
+      this.setState({
+        SupplierItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+  }
+
+
+
   render() {
-    const { match: { url }, itemDel, items, CompanyItems, SupplierItems} = this.props;
+    const { match: { url }, itemDel, items} = this.props;
+    let optionItems1 = this.state.CompanyItems.map((dropdownItem) =>
+         <option key={dropdownItem.id_IMONE} value={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
+     );
+     let optionItems2 = this.state.SupplierItems.map((dropdownItem) =>
+          <option key={dropdownItem.id_TIEKEJAS} value={dropdownItem.id_TIEKEJAS}>{dropdownItem.Pavadinimas}</option>
+      );
     return (
       <div>
         <Route path={`${url}/edit/:itemId`} render={
             props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)}
-            dropdownItems1={CompanyItems} dropdownItems2={SupplierItems} />
-        }/>
-      <Route path={`${url}/comments/:itemId`} render={
-            props => <CommentsItem {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)}
-             itemDel={itemDel}  />
+            dropdownItems1={optionItems1} dropdownItems2={optionItems2} />
         }/>
       <div>
-        <Table singleLine>
+        <Table striped singleLine>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Id</Table.HeaderCell>
@@ -28,7 +58,6 @@ class RestoranasItem extends Component {
               <Table.HeaderCell>Address</Table.HeaderCell>
               <Table.HeaderCell>Phone</Table.HeaderCell>
               <Table.HeaderCell>{"Manager's name"}</Table.HeaderCell>
-              <Table.HeaderCell></Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
             </Table.Row>
@@ -42,7 +71,6 @@ class RestoranasItem extends Component {
                   <Table.Cell>{item.Adresas}</Table.Cell>
                   <Table.Cell>{item.Telefono_numeris}</Table.Cell>
                   <Table.Cell>{item.Vadovo_vardas}</Table.Cell>
-                  <Table.Cell><Button secondary><Link style={button} to={`${url}/comments/${item.id_RESTORANAS}`}>Comments</Link><Icon style={icon} name="comment"/></Button></Table.Cell>
                   <Table.Cell><Button primary><Link style={button} to={`${url}/edit/${item.id_RESTORANAS}`}>Edit</Link></Button></Table.Cell>
                   <Table.Cell><Button negative onClick={itemDel.bind(this, item.id_RESTORANAS)}>Delete</Button></Table.Cell>
             </Table.Row>
@@ -60,10 +88,6 @@ const button = {
   textDecoration: `none`,
   color: `#ffffff`,
   padding: `11px 0px`
-}
-
-const icon = {
-  paddingLeft: '10%'
 }
 
 export default RestoranasItem
