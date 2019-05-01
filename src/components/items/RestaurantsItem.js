@@ -8,7 +8,8 @@ class RestoranasItem extends Component {
 
   state = {
     CompanyItems:[],
-    SupplierItems:[]
+    SupplierItems:[],
+    ResSuppItems: []
   }
 
   componentDidMount(){
@@ -16,6 +17,7 @@ class RestoranasItem extends Component {
   }
 
   getDropdown = _ => {
+    //Get companies info
     axios.get('/Companies')
     .then(response => {
       this.setState({
@@ -23,10 +25,20 @@ class RestoranasItem extends Component {
       });
     })
     .catch(error => console.log(error));
+    //Get suppliers info
     axios.get('/Suppliers')
     .then(response => {
       this.setState({
         SupplierItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+    //get which restaurants have which suppliers
+    axios.get('/Restaurants/suppliers')
+    .then(response => {
+      console.log("ResSupp: ", response.data.results);
+      this.setState({
+        ResSuppItems: response.data.results
       });
     })
     .catch(error => console.log(error));
@@ -46,15 +58,15 @@ class RestoranasItem extends Component {
       <div>
         <Route path={`${url}/edit/:itemId`} render={
             props => <RestoranasEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)}
-            dropdownItems1={optionItems1} dropdownItems2={optionItems2} />
+            dropdownItems1={optionItems1} dropdownItems2={optionItems2} ResSuppItems={this.state.ResSuppItems.find(item => item.fk_RESTORANAS.toString() === props.match.params.itemId)} />
         }/>
       <div>
         <Table striped singleLine>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Id</Table.HeaderCell>
-              <Table.HeaderCell>{"Restaurant's name"}</Table.HeaderCell>
               <Table.HeaderCell>{"Company's name"}</Table.HeaderCell>
+              <Table.HeaderCell>{"Restaurant's name"}</Table.HeaderCell>
               <Table.HeaderCell>Address</Table.HeaderCell>
               <Table.HeaderCell>Phone</Table.HeaderCell>
               <Table.HeaderCell>{"Manager's name"}</Table.HeaderCell>

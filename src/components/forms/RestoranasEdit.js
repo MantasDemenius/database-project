@@ -14,15 +14,14 @@ class RestoranasEdit extends Component {
         data: {
           id_RESTORANAS: props.id_RESTORANAS || '',
           Pavadinimas: props.Pavadinimas || '' ,
-          IPavadinimas: props.IPavadinimas || '',
           Adresas: props.Adresas || '',
           Telefono_numeris: props.Telefono_numeris || '',
           Vadovo_vardas: props.Vadovo_vardas || '',
           Vadovo_pavarde: props.Vadovo_pavarde || '',
           Vadovo_telefono_numeris: props.Vadovo_telefono_numeris || '',
           Vadovo_pastas: props.Vadovo_pastas || '',
-          dropdown1: '' || props.id_IMONE,
-          dropdown2: '' || props.id_TIEKEJAS
+          Imone: '' || props.id_IMONE,
+          Tiekejas: '' || props.ResSuppItems.fk_TIEKEJAS
         },
         errors: {}
 
@@ -30,6 +29,7 @@ class RestoranasEdit extends Component {
   }
 
   componentDidUpdate(prevProps) {
+
     if(this.props.id_RESTORANAS !== prevProps.id_RESTORANAS && prevProps.id_RESTORANAS !== undefined){
       this.setState({
         data: {
@@ -41,8 +41,8 @@ class RestoranasEdit extends Component {
           Vadovo_pavarde: this.props.Vadovo_pavarde,
           Vadovo_telefono_numeris: this.props.Vadovo_telefono_numeris,
           Vadovo_pastas: this.props.Vadovo_pastas,
-          dropdown1: this.props.id_IMONE,
-          dropdown2: this.props.id_TIEKEJAS,
+          Imone: this.props.id_IMONE,
+          Tiekejas: this.props.ResSuppItems.fk_TIEKEJAS
         }
       });
     }
@@ -130,16 +130,16 @@ class RestoranasEdit extends Component {
                 </Form.Field>
                 <Form.Field>
                   <label>{"Company"}</label>
-                    <select name="dropdown1" value={data.dropdown1} onChange={this.onChange}>
+                    <select name="Imone" value={data.Imone} onChange={this.onChange}>
                       {this.props.dropdownItems1}
                     </select>
                 </Form.Field>
-                {/*<Form.Field>
+                <Form.Field>
                   <label>{"Supplier"}</label>
-                    <select name="dropdown2" value={data.dropdown2} onChange={this.onChange}>
+                    <select name="Tiekejas" value={data.Tiekejas} onChange={this.onChange}>
                       {this.props.dropdownItems2}
                     </select>
-                </Form.Field>*/}
+                </Form.Field>
                 <Form.Field error={!!errors.Adresas}>
                   <label>Address</label>
                   <input name="Adresas" placeholder={this.props.Adresas} value={data.Adresas}

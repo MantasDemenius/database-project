@@ -19,10 +19,12 @@ class RestoranasAdd extends Component {
       Vadovo_pavarde: '',
       Vadovo_telefono_numeris:  '',
       Vadovo_pastas: '',
-      dropdown: '1'
+      Imone: '1',
+      Tiekejas: '1'
     },
     errors: {},
-    secondaryItems: []
+    CompanyItems: [],
+    SupplierItems: []
   };
 
   componentDidMount() {
@@ -67,8 +69,6 @@ class RestoranasAdd extends Component {
       url: `/Restaurants/add`
     })
     .then(response => {
-      if(response.status === 200)
-        console.log("Sekmingai pridetas");
         this.props.history.push(`/Restaurants`);
         window.location.reload();
 
@@ -87,18 +87,27 @@ class RestoranasAdd extends Component {
     axios.get('/Companies')
     .then(response => {
       this.setState({
-        secondaryItems: response.data.results
+        CompanyItems: response.data.results
       });
-      console.log(this.state.secondaryItems);
     })
     .catch(error => console.log(error));
+    axios.get('/Suppliers')
+    .then(response => {
+      this.setState({
+        SupplierItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+      
   }
 
   render () {
       const { errors, data } = this.state;
-      let dropdownItems = this.state.secondaryItems.map((dropdownItem) =>
+      let dropdownItems1 = this.state.CompanyItems.map((dropdownItem) =>
            <option key={dropdownItem.id_IMONE} value={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
-       );
+       );let dropdownItems2 = this.state.SupplierItems.map((dropdownItem) =>
+            <option key={dropdownItem.id_TIEKEJAS} value={dropdownItem.id_TIEKEJAS}>{dropdownItem.Pavadinimas}</option>
+        );
       return (
         <div id="myModal" className="modal">
             <div className="modalContent">
@@ -117,8 +126,14 @@ class RestoranasAdd extends Component {
                   </Form.Field>
                   <Form.Field>
                     <label>{"Company*"}</label>
-                      <select name="dropdown" value={data.dropdown} onChange={this.onChange}>
-                        {dropdownItems}
+                      <select name="Imone" value={data.Imone} onChange={this.onChange}>
+                        {dropdownItems1}
+                      </select>
+                  </Form.Field>
+                  <Form.Field>
+                    <label>{"Supplier*"}</label>
+                      <select name="Tiekejas" value={data.Tiekejas} onChange={this.onChange}>
+                        {dropdownItems2}
                       </select>
                   </Form.Field>
                   <Form.Field error={!!errors.Adresas}>
