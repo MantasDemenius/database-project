@@ -98,14 +98,15 @@ class RestoranasAdd extends Component {
       });
     })
     .catch(error => console.log(error));
-      
+
   }
 
   render () {
       const { errors, data } = this.state;
       let dropdownItems1 = this.state.CompanyItems.map((dropdownItem) =>
            <option key={dropdownItem.id_IMONE} value={dropdownItem.id_IMONE}>{dropdownItem.Pavadinimas}</option>
-       );let dropdownItems2 = this.state.SupplierItems.map((dropdownItem) =>
+       );
+       let dropdownItems2 = this.state.SupplierItems.map((dropdownItem) =>
             <option key={dropdownItem.id_TIEKEJAS} value={dropdownItem.id_TIEKEJAS}>{dropdownItem.Pavadinimas}</option>
         );
       return (

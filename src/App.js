@@ -10,6 +10,7 @@ import RestoranasAdd from './components/forms/RestoranasAdd';
 import MainPath from './components/pages/MainPath';
 import SuppliersAdd from './components/forms/SuppliersAdd';
 import ClientsAdd from './components/forms/ClientsAdd';
+import CommentsAdd from './components/forms/CommentsAdd';
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path='/Restaurants/add' component={RestoranasAdd} />
             <Route path='/Suppliers/add' component={SuppliersAdd} />
             <Route path='/Clients/add' component={ClientsAdd} />
+            <Route path='/Comments/add' component={CommentsAdd} />
 
       </div>
     );

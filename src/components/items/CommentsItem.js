@@ -1,16 +1,53 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Button, Table, Popup } from 'semantic-ui-react';
-import CommentEdit from '../forms/CommentEdit';
+import CommentsEdit from '../forms/CommentsEdit';
+import axios from 'axios';
 
 class CommentsItem extends Component {
 
+  state = {
+    RestaurantItems: [],
+    ClientItems: []
+  }
+
+  componentDidMount(){
+    this.getDropdown();
+  }
+
+  getDropdown = _ => {
+    //Get restaurants info
+    axios.get('/Restaurants')
+    .then(response => {
+      this.setState({
+        RestaurantItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+    //Get clients info
+    axios.get('/Clients')
+    .then(response => {
+      this.setState({
+        ClientItems: response.data.results
+      });
+    })
+    .catch(error => console.log(error));
+  }
+
+
   render() {
     const { match: { url }, itemDel, items} = this.props;
+    let optionItems1 = this.state.RestaurantItems.map((dropdownItem) =>
+         <option key={dropdownItem.id_RESTORANAS} value={dropdownItem.id_RESTORANAS}>{dropdownItem.Pavadinimas}</option>
+     );
+     let optionItems2 = this.state.ClientItems.map((dropdownItem) =>
+          <option key={dropdownItem.id_KLIENTAS} value={dropdownItem.id_KLIENTAS}>{dropdownItem.Vardas}</option>
+      );
     return (
       <div>
         <Route path={`${url}/edit/:itemId`} render={
-            props => <CommentEdit {...items.find(item => item.id_RESTORANAS.toString() === props.match.params.itemId)}/>
+            props => <CommentsEdit {...items.find(item => item.id_ATSILIEPIMAS.toString() === props.match.params.itemId)}
+            dropdownItems1={optionItems1} dropdownItems2={optionItems2}/>
         }/>
       <div>
         <Table striped singleLine>

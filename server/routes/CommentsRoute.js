@@ -6,6 +6,19 @@ module.exports = (app, conn) => {
 
 
   app.get('/Comments', (req, res) => {
+    // var sql = "SELECT atsiliepimas.id_ATSILIEPIMAS, \
+    // restoranas.Pavadinimas as RPavadinimas, \
+    // restoranas.id_RESTORANAS, \
+    // klientas.id_KLIENTAS, \
+    // klientas.Vardas as KVardas, \
+    // atsiliepimas.Data, \
+    // atsiliepimas.Komentaras, \
+    // atsiliepimas.Ivertinimas \
+    // FROM atsiliepimas \
+    // LEFT JOIN restoranas ON atsiliepimas.fk_RESTORANASid_RESTORANAS = restoranas.id_RESTORANAS \
+    // LEFT JOIN klientas ON atsiliepimas.fk_KLIENTASid_KLIENTAS = klientas.id_KLIENTAS GROUP BY restoranas.id_RESTORANAS, klientas.id_KLIENTAS \
+    // ORDER BY restoranas.id_RESTORANAS ASC";
+
     var sql = "SELECT atsiliepimas.id_ATSILIEPIMAS, \
     restoranas.Pavadinimas as RPavadinimas, \
     restoranas.id_RESTORANAS, \
@@ -20,6 +33,7 @@ module.exports = (app, conn) => {
     ORDER BY restoranas.id_RESTORANAS ASC";
     conn.query(sql, (err, data) => {
       if (err) {
+        console.log(err);
         res.status(500).json({ errors: {globalErr: err } });
       }
       else{
@@ -40,63 +54,53 @@ module.exports = (app, conn) => {
     });
   });
 
-  // app.post('/Restaurants/edit', (req, res) => {
-  //   var sql = "UPDATE restoranas SET \
-  //   fk_IMONEid_IMONE = ?, \
-  //   Pavadinimas = ?, \
-  //   Adresas = ?, \
-  //   Telefono_numeris = ?, \
-  //   Vadovo_vardas = ?, \
-  //   Vadovo_pavarde = ?, \
-  //   Vadovo_telefono_numeris = ?, \
-  //   Vadovo_pastas = ? \
-  //   WHERE id_RESTORANAS = ?";
-  //   conn.query(sql, [
-  //     req.body.dropdown,
-  //     req.body.Pavadinimas,
-  //     req.body.Adresas,
-  //     req.body.Telefono_numeris,
-  //     req.body.Vadovo_vardas,
-  //     req.body.Vadovo_pavarde,
-  //     req.body.Vadovo_telefono_numeris,
-  //     req.body.Vadovo_pastas,
-  //     req.body.id_RESTORANAS], (err, data) => {
-  //     if (err) {
-  //       res.status(500).json({ errors: {globalErr: err } });
-  //     }
-  //     else{
-  //       res.sendStatus(200);
-  //     }
-  //   });
-  // });
-  //
-  // app.post('/Restaurants/add', (req, res) => {
-  //   console.log(req.body);
-  //   var sql = "INSERT INTO restoranas (\
-  //     fk_IMONEid_IMONE, \
-  //     Pavadinimas, \
-  //     Adresas, \
-  //     Telefono_numeris, \
-  //     Vadovo_vardas, \
-  //     Vadovo_pavarde, \
-  //     Vadovo_telefono_numeris, \
-  //     Vadovo_pastas\
-  //   ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-  //   conn.query(sql, [
-  //   req.body.dropdown,
-  //   req.body.Pavadinimas,
-  //   req.body.Adresas,
-  //   req.body.Telefono_numeris,
-  //   req.body.Vadovo_vardas,
-  //   req.body.Vadovo_pavarde,
-  //   req.body.Vadovo_telefono_numeris,
-  //   req.body.Vadovo_pastas], (err, data) => {
-  //     if (err) {
-  //       res.status(500).json({ errors: {globalErr: err } });
-  //     }
-  //     else{
-  //       res.sendStatus(200);
-  //     }
-  //   });
-  // });
+  app.post('/Comments/edit', (req, res) => {
+    var sql = "UPDATE atsiliepimas SET \
+    fk_RESTORANASid_RESTORANAS = ?, \
+    fk_KLIENTASid_KLIENTAS = ?, \
+    Data = ?, \
+    Komentaras = ?, \
+    Ivertinimas = ? \
+    WHERE id_ATSILIEPIMAS = ?";
+    conn.query(sql, [
+      req.body.Restoranas,
+      req.body.Klientas,
+      req.body.Data,
+      req.body.Komentaras,
+      req.body.Ivertinimas,
+      req.body.id_ATSILIEPIMAS
+    ], (err, data) => {
+      if (err) {
+        res.status(500).json({ errors: {globalErr: err } });
+      }
+      else{
+        res.sendStatus(200);
+      }
+    });
+  });
+
+  app.post('/Comments/add', (req, res) => {
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var sql = "INSERT INTO atsiliepimas (\
+      fk_RESTORANASid_RESTORANAS, \
+      fk_KLIENTASid_KLIENTAS, \
+      Data, \
+      Komentaras, \
+      Ivertinimas \
+    ) VALUES (?, ?, ?, ?, ?)";
+    conn.query(sql, [
+      req.body.Restoranas,
+      req.body.Klientas,
+      date,
+      req.body.Komentaras,
+      req.body.Ivertinimas], (err, data) => {
+      if (err) {
+        res.status(500).json({ errors: {globalErr: err } });
+      }
+      else{
+        res.sendStatus(200);
+      }
+    });
+  });
 }
