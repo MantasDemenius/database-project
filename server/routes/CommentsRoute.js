@@ -29,8 +29,7 @@ module.exports = (app, conn) => {
     atsiliepimas.Ivertinimas \
     FROM atsiliepimas \
     LEFT JOIN restoranas ON atsiliepimas.fk_RESTORANASid_RESTORANAS = restoranas.id_RESTORANAS \
-    LEFT JOIN klientas ON atsiliepimas.fk_KLIENTASid_KLIENTAS = klientas.id_KLIENTAS \
-    ORDER BY restoranas.id_RESTORANAS ASC";
+    LEFT JOIN klientas ON atsiliepimas.fk_KLIENTASid_KLIENTAS = klientas.id_KLIENTAS";
     conn.query(sql, (err, data) => {
       if (err) {
         console.log(err);
@@ -82,6 +81,7 @@ module.exports = (app, conn) => {
   app.post('/Comments/add', (req, res) => {
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    console.log(req.body);
     var sql = "INSERT INTO atsiliepimas (\
       fk_RESTORANASid_RESTORANAS, \
       fk_KLIENTASid_KLIENTAS, \
@@ -89,18 +89,54 @@ module.exports = (app, conn) => {
       Komentaras, \
       Ivertinimas \
     ) VALUES (?, ?, ?, ?, ?)";
-    conn.query(sql, [
-      req.body.Restoranas,
-      req.body.Klientas,
-      date,
-      req.body.Komentaras,
-      req.body.Ivertinimas], (err, data) => {
-      if (err) {
-        res.status(500).json({ errors: {globalErr: err } });
-      }
-      else{
-        res.sendStatus(200);
-      }
-    });
+    var sql1 = "INSERT INTO klientas (\
+      Vardas, \
+      Adresas, \
+      Telefono_numeris, \
+      Pastas \
+    ) VALUES (?, ?, ?, ?)";
+    if(req.body.Vardas === '' && req.body.Adresas === '' && req.body.Telefono_numeris === '' && req.body.Pastas === ''){
+      conn.query(sql, [
+        req.body.Restoranas,
+        req.body.Klientas,
+        date,
+        req.body.Komentaras,
+        req.body.Ivertinimas], (err, data) => {
+        if (err) {
+          res.status(500).json({ errors: {globalErr: err } });
+        }
+        else{
+          res.sendStatus(200);
+        }
+      });
+    }else{
+
+      conn.query(sql1, [
+      req.body.Vardas,
+      req.body.Adresas,
+      req.body.Telefono_numeris,
+      req.body.Pastas], (err, data) => {
+        if (err) {
+          res.status(500).json({ errors: {globalErr: err } });
+        }
+        else{
+          conn.query(sql, [
+            req.body.Restoranas,
+            data.insertId,
+            date,
+            req.body.Komentaras,
+            req.body.Ivertinimas], (err1, data1) => {
+            if (err1) {
+              res.status(500).json({ errors: {globalErr: err } });
+            }
+            else{
+              res.status(200).json({ message: { globalSucc: messageSuccess }})
+            }
+          });
+        }
+      });
+
+    }
+
   });
 }

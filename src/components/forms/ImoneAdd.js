@@ -37,10 +37,6 @@ class ImoneAdd extends Component {
     if(!this.state.data.Pavadinimas) errors.Pavadinimas = errText;
     if(!this.state.data.Adresas) errors.Adresas = errText;
     if(!Validator.isMobilePhone(this.state.data.Telefono_numeris)) errors.Telefono_numeris = errText + " or a wrong number format";
-    // const errText = "Privalomas laukelis";
-    // if(!data.Pavadinimas) errors.Pavadinimas = errText;
-    // if(!data.Adresas) errors.Adresas = errText;
-    // if(!data.Telefono_numeris) errors.Telefono_numeris = errText;
     return errors;
   }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Message } from 'semantic-ui-react';
+import { Form, Button, Message, Input } from 'semantic-ui-react';
 import InLineError from '../messages/InLineError';
 import '../../style/modalContentStyle.css';
 import axios from 'axios';
@@ -16,15 +16,21 @@ class CommentsAdd extends Component {
       Klientas: '1',
       Data: '',
       Komentaras: '',
-      Ivertinimas: '1'
+      Ivertinimas: '1',
+      Vardas:  '' ,
+      Adresas: '',
+      Telefono_numeris:  '',
+      Pastas: ''
     },
     errors: {},
     RestaurantItems: [],
-    ClientItems: []
+    ClientItems: [],
+    visible: false
   };
 
   componentDidMount() {
     document.getElementById('myModal').style.display = "block";
+    document.getElementById('addNew').style.display = "none";
     this.getDropdown();
   }
 
@@ -32,11 +38,24 @@ class CommentsAdd extends Component {
     data: { ...this.state.data, [e.target.name]: e.target.value}
   });
 
+  handleNew = e => {
+    if(document.getElementById('addNew').style.display === "block"){
+      document.getElementById('addNew').style.display = "none";
+    }else{
+      document.getElementById('addNew').style.display = "block";
+    }
+  }
+
   onSubmit = (e) => {
     e.preventDefault();
     const errors = this.validate(this.state.data);
     this.setState({errors});
+    if (document.getElementById('addNew').style.display === "block"){
+      this.setState({visible: true});
+    }
+
     if(Object.keys(errors).length === 0) {
+
       this.addData(this.state.data);
     }
   }
@@ -44,13 +63,32 @@ class CommentsAdd extends Component {
   validate = (data) => {
     const errors = {};
     const errText = "Can't be empty";
-    if(!(this.state.data.Komentaras)) errors.Komentaras = errText;
-    if(this.state.data.Komentaras.length >= 255) errors.Komentaras = "Too long try to fit into 255 charachters";
+    if(!(this.state.data.Komentaras)){
+      errors.Komentaras = errText;
+    } else{
+      if(this.state.data.Komentaras.length >= 255) errors.Komentaras = "Too long try to fit into 255 charachters";
+    }
     if(!(this.state.data.Ivertinimas)) errors.Ivertinimas = errText;
+    if(document.getElementById('addNew').style.display === "block"){
+      if(!this.state.data.Vardas) errors.Vardas = errText;
+      if(!this.state.data.Telefono_numeris) {
+        errors.Telefono_numeris = errText;
+      }else {
+        if(!Validator.isMobilePhone(this.state.data.Telefono_numeris)) errors.Telefono_numeris = "Wrong number format";
+      }
+
+      if(!this.state.data.Adresas) errors.Adresas = errText;
+      if(!this.state.data.Pastas) {
+        errors.Pastas = errText;
+      }else {
+        if(!Validator.isEmail(this.state.data.Pastas)) errors.Pastas = "Invalid email";
+      }
+    }
     return errors;
   }
 
   addData = (data) => {
+
     axios({
       method: 'post',
       data: data,
@@ -129,7 +167,36 @@ class CommentsAdd extends Component {
                         {optionItems2}
                       </select>
                   </Form.Field>
-                  <Form.Field error={!!errors.Adresas}>
+                      <div id="addNew">
+                        <Form.Field error={!!errors.Vardas}>
+                        <label>{"Client's Name*"}</label>
+                        <input name="Vardas" placeholder={this.props.Vardas} value={data.Vardas}
+                          onChange={this.onChange} />
+                        {errors.Vardas && <InLineError text={errors.Vardas} />}
+                      </Form.Field>
+                      <Form.Field error={!!errors.Adresas}>
+                        <label>Address*</label>
+                        <input name="Adresas" placeholder={this.props.Adresas} value={data.Adresas}
+                          onChange={this.onChange} />
+                        {errors.Adresas && <InLineError text={errors.Adresas} />}
+                      </Form.Field>
+                      <Form.Field error={!!errors.Telefono_numeris}>
+                        <label>Phone*</label>
+                        <input name="Telefono_numeris" value={data.Telefono_numeris} onChange={this.onChange} />
+                        {errors.Telefono_numeris && <InLineError text={errors.Telefono_numeris} />}
+                      </Form.Field>
+                      <Form.Field error={!!errors.Pastas}>
+                        <label>Email*</label>
+                        <input name="Pastas" placeholder={this.props.Pastas} value={data.Pastas}
+                          onChange={this.onChange} />
+                        {errors.Pastas && <InLineError text={errors.Pastas} />}
+                      </Form.Field>
+                    </div>
+
+                    <a href="" onMouseDown={this.handleNew}>Click to add a client</a>
+
+
+                  <Form.Field error={!!errors.Komentaras}>
                     <label>Comment*</label>
                     <Form.TextArea name="Komentaras" value={data.Komentaras} onChange={this.onChange}/>
                     {errors.Komentaras && <InLineError text={errors.Komentaras} />}
