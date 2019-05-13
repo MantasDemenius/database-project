@@ -40,7 +40,7 @@ class MainPath extends Component {
 
 
   getItems = (url) => {
-    axios.get(`${url}`)
+    axios.get(`https://desolate-scrubland-14964.herokuapp.com${url}`)
     .then(response => {
       this.setState({items: response.data.results});
       console.log("getitems: ", this.state.items);
