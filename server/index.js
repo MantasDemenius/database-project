@@ -38,8 +38,11 @@ conn.connect(function(err){
   (err)? console.log(err) : console.log("all good my man with connection");
 });
 
-app.get('/', (req, res) => {
-  res.send("Go to /imones to see imones table")
+// Serve any static files built by React
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("/", function(req, res) {
+  res.sendFile(path.join(__dirname, "client/build", "index.html"));
 });
 
 require('./routes/CompaniesRoute')(app, conn);
