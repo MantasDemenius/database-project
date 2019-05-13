@@ -19,13 +19,13 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-            <Route exact path='database-project/' component={index}></Route>
-            <Route path='database-project/:mainPath' component={MainPath}></Route>
-            <Route path='database-project/Companies/add' component={ImoneAdd} />
-            <Route path='database-project/Restaurants/add' component={RestoranasAdd} />
-            <Route path='database-project/Suppliers/add' component={SuppliersAdd} />
-            <Route path='database-project/Clients/add' component={ClientsAdd} />
-            <Route path='database-project/Comments/add' component={CommentsAdd} />
+            <Route exact path='/' component={index}></Route>
+            <Route path='/:mainPath' component={MainPath}></Route>
+            <Route path='/Companies/add' component={ImoneAdd} />
+            <Route path='/Restaurants/add' component={RestoranasAdd} />
+            <Route path='/Suppliers/add' component={SuppliersAdd} />
+            <Route path='/Clients/add' component={ClientsAdd} />
+            <Route path='/Comments/add' component={CommentsAdd} />
 
       </div>
     );
