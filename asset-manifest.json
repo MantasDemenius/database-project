@@ -1,5 +1,5 @@
 {
-  "main.css": "/database-project/static/css/main.ae6ce581.chunk.css",
+  "main.css": "/database-project/static/css/main.f5604eca.chunk.css",
   "main.js": "/database-project/static/js/main.eb1d9639.chunk.js",
   "main.js.map": "/database-project/static/js/main.eb1d9639.chunk.js.map",
   "runtime~main.js": "/database-project/static/js/runtime~main.675ef7be.js",
@@ -8,9 +8,9 @@
   "static/js/2.9145d352.chunk.js": "/database-project/static/js/2.9145d352.chunk.js",
   "static/js/2.9145d352.chunk.js.map": "/database-project/static/js/2.9145d352.chunk.js.map",
   "index.html": "/database-project/index.html",
-  "precache-manifest.baa6ede8de9fba7c14ecf20981cf8d75.js": "/database-project/precache-manifest.baa6ede8de9fba7c14ecf20981cf8d75.js",
+  "precache-manifest.bc918726c571fbade623e9a3dc56f749.js": "/database-project/precache-manifest.bc918726c571fbade623e9a3dc56f749.js",
   "service-worker.js": "/database-project/service-worker.js",
   "static/css/2.5366cb87.chunk.css.map": "/database-project/static/css/2.5366cb87.chunk.css.map",
-  "static/css/main.ae6ce581.chunk.css.map": "/database-project/static/css/main.ae6ce581.chunk.css.map",
+  "static/css/main.f5604eca.chunk.css.map": "/database-project/static/css/main.f5604eca.chunk.css.map",
   "static/media/semantic.min.css": "/database-project/static/media/outline-icons.ef60a4f6.woff"
 }
