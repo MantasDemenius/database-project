@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Message, Input } from 'semantic-ui-react';
+import { Form, Button, Message } from 'semantic-ui-react';
 import InLineError from '../messages/InLineError';
 import '../../style/modalContentStyle.css';
 import axios from 'axios';
@@ -193,7 +193,7 @@ class CommentsAdd extends Component {
                       </Form.Field>
                     </div>
 
-                    <a href="" onMouseDown={this.handleNew}>Click to add a client</a>
+                    <button type="button" onMouseDown={this.handleNew}>Click to add a client</button>
 
 
                   <Form.Field error={!!errors.Komentaras}>
