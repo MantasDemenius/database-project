@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/database-project/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "5c03cc851013b2a5c5c3",
+    "revision": "b72880f863f44e8e5e2e",
     "url": "/database-project/static/css/main.f5604eca.chunk.css"
   },
   {
@@ -44,8 +44,8 @@ self.__precacheManifest = [
     "url": "/database-project/static/media/icons.0ab54153.woff2"
   },
   {
-    "revision": "5c03cc851013b2a5c5c3",
-    "url": "/database-project/static/js/main.b8b898b9.chunk.js"
+    "revision": "b72880f863f44e8e5e2e",
+    "url": "/database-project/static/js/main.2cdce64e.chunk.js"
   },
   {
     "revision": "e8c322de9658cbeb8a774b6624167c2c",
@@ -56,12 +56,12 @@ self.__precacheManifest = [
     "url": "/database-project/static/media/brand-icons.a046592b.woff"
   },
   {
-    "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
-    "url": "/database-project/static/media/icons.8e3c7f55.eot"
-  },
-  {
     "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
     "url": "/database-project/static/media/icons.b87b9ba5.ttf"
+  },
+  {
+    "revision": "8e3c7f5520f5ae906c6cf6d7f3ddcd19",
+    "url": "/database-project/static/media/icons.8e3c7f55.eot"
   },
   {
     "revision": "13db00b7a34fee4d819ab7f9838cc428",
@@ -84,7 +84,7 @@ self.__precacheManifest = [
     "url": "/database-project/static/css/2.5366cb87.chunk.css"
   },
   {
-    "revision": "9026cfa1243f7f4f0d0771c7eb522f78",
+    "revision": "5b140f3dadb8b220358c7fb98db97e1a",
     "url": "/database-project/index.html"
   }
 ];
