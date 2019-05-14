@@ -48,13 +48,13 @@ class ImoneAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Companies/add`
+      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Companies/add`
     })
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/Companies`);
-        window.location.reload();
+        //this.props.history.push(`/database-project/Companies`);
+        //window.location.reload();
 
     })
     .catch(err => {
@@ -68,7 +68,7 @@ class ImoneAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Companies`);
+    this.props.history.push(`/database-project/Companies`);
   }
 
 

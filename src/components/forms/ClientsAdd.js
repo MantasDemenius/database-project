@@ -55,12 +55,12 @@ class ClientsAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Clients/add`
+      url: `https://desolate-scrubland-14964.herokuapp.com/Clients/add`
     })
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/Clients`);
+        this.props.history.push(`/database-project/Clients`);
         window.location.reload();
     })
     .catch(err => {
@@ -70,7 +70,7 @@ class ClientsAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Clients`);
+    this.props.history.push(`/database-project/Clients`);
   }
 
   render () {

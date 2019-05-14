@@ -37,6 +37,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "dotenv": "^8.0.0",
     "gh-pages": "^2.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1"

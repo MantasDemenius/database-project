@@ -46,7 +46,7 @@ class ImoneEdit extends Component {
       this.updateData(this.state.data);
   }
 }
-
+//https://desolate-scrubland-14964.herokuapp.com/database-project
   updateData = (data) => {
     axios({
       method: 'post',
@@ -55,14 +55,15 @@ class ImoneEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Companies/edit`
+      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Companies/edit`
     })
     .then(response => {
-      if(response.status === 200)
-        // window.history.back();
-        // window.location.reload();
-        window.location.replace("/Companies");
+      // if(response.status === 200)
+      //   window.location.reload();
+         // window.history.back();
 
+        //window.location.replace("/database-project/Companies");
+        console.log("all good with post");
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors });

@@ -193,7 +193,7 @@ class CommentsAdd extends Component {
                       </Form.Field>
                     </div>
 
-                    <button type="button" onMouseDown={this.handleNew}>Click to add a client</button>
+                    <Button type="button" onMouseDown={this.handleNew}>Click to add a client</Button>
 
 
                   <Form.Field error={!!errors.Komentaras}>

@@ -38,12 +38,13 @@ class MainPath extends Component {
     return true;
   }
 
-
+//https://desolate-scrubland-14964.herokuapp.com
   getItems = (url) => {
     axios.get(`https://desolate-scrubland-14964.herokuapp.com${url}`)
     .then(response => {
       this.setState({items: response.data.results});
       console.log("getitems: ", this.state.items);
+      console.log("got items from server heroku");
     })
     .catch(error => console.log(error));
   }
@@ -55,7 +56,7 @@ class MainPath extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `${this.state.url}/del?id=${id}`
+      url: `https://desolate-scrubland-14964.herokuapp.com${this.state.url}/del?id=${id}`
     })
     .then(response => {
       if(response.status === 200)
@@ -71,23 +72,23 @@ class MainPath extends Component {
   RouteCheck = (prop) => {
     const location = prop.location;
       switch(location){
-        case "/Companies":
+        case "/database-project/Companies":
           return (<Route path={`${location}`} render={props => (
                   <CompaniesItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/Restaurants":
+        case "/database-project/Restaurants":
           return (<Route path={`${location}`} render={props => (
                   <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel}/>
           )} />)
-        case "/Suppliers":
+        case "/database-project/Suppliers":
           return (<Route path={`${location}`} render={props => (
                   <SuppliersItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/Clients":
+        case "/database-project/Clients":
           return (<Route path={`${location}`} render={props => (
                   <ClientsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/Comments":
+        case "/database-project/Comments":
           return (<Route path={`${location}`} render={props => (
                   <CommentsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
