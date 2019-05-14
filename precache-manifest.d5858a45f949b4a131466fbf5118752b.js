@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/database-project/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "f5dfb06cf5d1709e31c6",
+    "revision": "2b32f3ba39dc48b29a92",
     "url": "/database-project/static/css/main.f5604eca.chunk.css"
   },
   {
@@ -20,12 +20,12 @@ self.__precacheManifest = [
     "url": "/database-project/static/js/2.9145d352.chunk.js"
   },
   {
-    "revision": "ef60a4f6c25ef7f39f2d25a748dbecfe",
-    "url": "/database-project/static/media/outline-icons.ef60a4f6.woff"
-  },
-  {
     "revision": "cd6c777f1945164224dee082abaea03a",
     "url": "/database-project/static/media/outline-icons.cd6c777f.woff2"
+  },
+  {
+    "revision": "ef60a4f6c25ef7f39f2d25a748dbecfe",
+    "url": "/database-project/static/media/outline-icons.ef60a4f6.woff"
   },
   {
     "revision": "9c74e172f87984c48ddf5c8108cabe67",
@@ -44,8 +44,8 @@ self.__precacheManifest = [
     "url": "/database-project/static/media/icons.0ab54153.woff2"
   },
   {
-    "revision": "f5dfb06cf5d1709e31c6",
-    "url": "/database-project/static/js/main.1561554c.chunk.js"
+    "revision": "2b32f3ba39dc48b29a92",
+    "url": "/database-project/static/js/main.d669df51.chunk.js"
   },
   {
     "revision": "e8c322de9658cbeb8a774b6624167c2c",
@@ -60,12 +60,12 @@ self.__precacheManifest = [
     "url": "/database-project/static/media/icons.8e3c7f55.eot"
   },
   {
-    "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
-    "url": "/database-project/static/media/icons.b87b9ba5.ttf"
-  },
-  {
     "revision": "c5ebe0b32dc1b5cc449a76c4204d13bb",
     "url": "/database-project/static/media/brand-icons.c5ebe0b3.ttf"
+  },
+  {
+    "revision": "b87b9ba532ace76ae9f6edfe9f72ded2",
+    "url": "/database-project/static/media/icons.b87b9ba5.ttf"
   },
   {
     "revision": "13db00b7a34fee4d819ab7f9838cc428",
@@ -84,7 +84,7 @@ self.__precacheManifest = [
     "url": "/database-project/static/css/2.5366cb87.chunk.css"
   },
   {
-    "revision": "648638ed640c703e2997bc9139624de6",
+    "revision": "9320e84e4c9ff507a3fc39c137728a22",
     "url": "/database-project/index.html"
   }
 ];
