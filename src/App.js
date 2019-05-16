@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 //import './style/style.css';
 
 import Header from './components/includes/Header';
-import index from './components/pages/';
+import index from './components/pages/Index.js';
 import ImoneAdd from './components/forms/ImoneAdd';
 import RestoranasAdd from './components/forms/RestoranasAdd';
 import MainPath from './components/pages/MainPath';
