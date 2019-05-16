@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/database-project/static/media/icons.faff9214.woff"
   },
   {
-    "revision": "6a827f90abfc1b9467d3",
+    "revision": "ef163d6a06eb6b2cc90c",
     "url": "/database-project/static/css/main.f5604eca.chunk.css"
   },
   {
@@ -44,8 +44,8 @@ self.__precacheManifest = [
     "url": "/database-project/static/media/icons.0ab54153.woff2"
   },
   {
-    "revision": "6a827f90abfc1b9467d3",
-    "url": "/database-project/static/js/main.536e68bd.chunk.js"
+    "revision": "ef163d6a06eb6b2cc90c",
+    "url": "/database-project/static/js/main.4ab9d928.chunk.js"
   },
   {
     "revision": "e8c322de9658cbeb8a774b6624167c2c",
@@ -84,7 +84,7 @@ self.__precacheManifest = [
     "url": "/database-project/static/css/2.5366cb87.chunk.css"
   },
   {
-    "revision": "916484e294dfdb08c46dbf00137939ce",
+    "revision": "f74a4af0aa55a063f6b75e4c77e0dd51",
     "url": "/database-project/index.html"
   }
 ];
