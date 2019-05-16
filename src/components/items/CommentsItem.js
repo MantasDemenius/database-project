@@ -9,6 +9,7 @@ class CommentsItem extends Component {
   state = {
     RestaurantItems: [],
     ClientItems: []
+
   }
 
   componentDidMount(){
