@@ -100,7 +100,7 @@ class CommentsAdd extends Component {
     })
     .then(response => {
       if(response.status === 200){
-        this.props.history.push(`/database-project/Comments`);
+        window.history.back();
       }
         // window.location.reload();
 
@@ -112,7 +112,7 @@ class CommentsAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`database-project/Comments`);
+    window.history.back();
   }
 
   getDropdown = _ => {

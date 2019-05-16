@@ -80,7 +80,7 @@ class SuppliersAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`database-project/Suppliers`);
+    window.history.back();
   }
 
   render () {
