@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Form, Button, Message } from 'semantic-ui-react'
 import InLineError from '../messages/InLineError';
 import '../../style/modalContentStyle.css';
-import Validator from 'validator';
 import DatabaseBoxError from '../messages/DatabaseBoxError'
 
 class CommentEdit extends Component {

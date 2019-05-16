@@ -20,8 +20,8 @@ class RestoranasEdit extends Component {
           Vadovo_pavarde: props.Vadovo_pavarde || '',
           Vadovo_telefono_numeris: props.Vadovo_telefono_numeris || '',
           Vadovo_pastas: props.Vadovo_pastas || '',
-          Imone: '' || props.id_IMONE,
-          Tiekejas: '' || props.ResSuppItems.fk_TIEKEJAS
+          Imone: props.id_IMONE || '',
+          Tiekejas: props.ResSuppItems.fk_TIEKEJAS || ''
         },
         errors: {}
 
