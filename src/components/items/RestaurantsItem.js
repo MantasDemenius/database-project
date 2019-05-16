@@ -18,7 +18,7 @@ class RestoranasItem extends Component {
 
   getDropdown = _ => {
     //Get companies info
-    axios.get('/Companies')
+    axios.get('/database-project/Companies')
     .then(response => {
       this.setState({
         CompanyItems: response.data.results
@@ -26,7 +26,7 @@ class RestoranasItem extends Component {
     })
     .catch(error => console.log(error));
     //Get suppliers info
-    axios.get('/Suppliers')
+    axios.get('/database-project/Suppliers')
     .then(response => {
       this.setState({
         SupplierItems: response.data.results
@@ -34,7 +34,7 @@ class RestoranasItem extends Component {
     })
     .catch(error => console.log(error));
     //get which restaurants have which suppliers
-    axios.get('/Restaurants/suppliers')
+    axios.get('/database-project/Restaurants/suppliers')
     .then(response => {
       console.log("ResSupp: ", response.data.results);
       this.setState({

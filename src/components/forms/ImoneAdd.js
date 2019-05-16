@@ -53,6 +53,7 @@ class ImoneAdd extends Component {
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai pridetas");
+        window.history.back();
         //this.props.history.push(`/database-project/Companies`);
         //window.location.reload();
 

@@ -66,11 +66,14 @@ class RestoranasAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Restaurants/add`
+      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Restaurants/add`
     })
     .then(response => {
-        this.props.history.push(`/Restaurants`);
-        window.location.reload();
+      if(response.status === 200){
+        window.history.back();
+      }
+        // this.props.history.push(`/Restaurants`);
+        // window.location.reload();
 
     })
     .catch(err => {
@@ -80,18 +83,18 @@ class RestoranasAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Restaurants`);
+    this.props.history.push(`/database-project/Restaurants`);
   }
 
   getDropdown = _ => {
-    axios.get('/Companies')
+    axios.get('https://desolate-scrubland-14964.herokuapp.com/database-project/Companies')
     .then(response => {
       this.setState({
         CompanyItems: response.data.results
       });
     })
     .catch(error => console.log(error));
-    axios.get('/Suppliers')
+    axios.get('https://desolate-scrubland-14964.herokuapp.com/database-project/Suppliers')
     .then(response => {
       this.setState({
         SupplierItems: response.data.results

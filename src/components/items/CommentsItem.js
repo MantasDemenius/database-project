@@ -17,7 +17,7 @@ class CommentsItem extends Component {
 
   getDropdown = _ => {
     //Get restaurants info
-    axios.get('/Restaurants')
+    axios.get('https://desolate-scrubland-14964.herokuapp.com/database-project/Restaurants')
     .then(response => {
       this.setState({
         RestaurantItems: response.data.results
@@ -25,7 +25,7 @@ class CommentsItem extends Component {
     })
     .catch(error => console.log(error));
     //Get clients info
-    axios.get('/Clients')
+    axios.get('https://desolate-scrubland-14964.herokuapp.com/database-project/Clients')
     .then(response => {
       this.setState({
         ClientItems: response.data.results

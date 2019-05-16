@@ -96,11 +96,13 @@ class CommentsAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Comments/add`
+      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Comments/add`
     })
     .then(response => {
-        this.props.history.push(`/Comments`);
-        window.location.reload();
+      if(response.status === 200){
+        this.props.history.push(`/database-project/Comments`);
+      }
+        // window.location.reload();
 
     })
     .catch(err => {
@@ -110,12 +112,12 @@ class CommentsAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Comments`);
+    this.props.history.push(`database-project/Comments`);
   }
 
   getDropdown = _ => {
     //Get restaurants info
-    axios.get('/Restaurants')
+    axios.get('https://desolate-scrubland-14964.herokuapp.com/database-project/Restaurants')
     .then(response => {
       this.setState({
         RestaurantItems: response.data.results
@@ -123,7 +125,7 @@ class CommentsAdd extends Component {
     })
     .catch(error => console.log(error));
     //Get clients info
-    axios.get('/Clients')
+    axios.get('https://desolate-scrubland-14964.herokuapp.com/database-project/Clients')
     .then(response => {
       this.setState({
         ClientItems: response.data.results

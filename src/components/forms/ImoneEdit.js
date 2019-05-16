@@ -65,6 +65,7 @@ class ImoneEdit extends Component {
         //window.location.replace("/database-project/Companies");
         if(response.status === 200){
           console.log("posted");
+          window.history.back();
         }
 
     })

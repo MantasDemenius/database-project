@@ -63,13 +63,15 @@ class SuppliersAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Suppliers/add`
+      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Suppliers/add`
     })
     .then(response => {
-      if(response.status === 200)
+      if(response.status === 200){
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/Suppliers`);
-        window.location.reload();
+        window.history.back();
+      }
+        // this.props.history.push(`/Suppliers`);
+        // window.location.reload();
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors });
@@ -78,7 +80,7 @@ class SuppliersAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Suppliers`);
+    this.props.history.push(`database-project/Suppliers`);
   }
 
   render () {

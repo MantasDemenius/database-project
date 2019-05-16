@@ -57,13 +57,16 @@ class SuppliersEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://desolate-scrubland-14964.herokuapp.com/Clients/edit`
+      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Clients/edit`
     })
     .then(response => {
-      if(response.status === 200)
+      if(response.status === 200){
+        console.log("posted");
+        window.history.back();
+      }
         // window.history.back();
         // window.location.reload();
-        window.location.replace("/database-project/Clients");
+        // window.location.replace("/database-project/Clients");
 
     })
     .catch(err => {

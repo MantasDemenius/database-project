@@ -69,13 +69,14 @@ class RestoranasEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Restaurants/edit`
+      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Restaurants/edit`
     })
     .then(response => {
-      if(response.status === 200)
-        // window.history.back();
+      if(response.status === 200){
+        window.history.back();
+      }
         // window.location.reload();
-        window.location.replace("/Restaurants");
+        // window.location.replace("/Restaurants");
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors });

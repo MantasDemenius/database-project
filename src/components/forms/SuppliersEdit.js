@@ -65,13 +65,14 @@ class SuppliersEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Suppliers/edit`
+      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Suppliers/edit`
     })
     .then(response => {
-      if(response.status === 200)
-        // window.history.back();
+      if(response.status === 200){
+        window.history.back();
+      }
         // window.location.reload();
-        window.location.replace("/Suppliers");
+        // window.location.replace("/Suppliers");
 
     })
     .catch(err => {

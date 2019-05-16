@@ -59,8 +59,10 @@ class MainPath extends Component {
       url: `https://desolate-scrubland-14964.herokuapp.com${this.state.url}/del?id=${id}`
     })
     .then(response => {
-      if(response.status === 200)
-        window.location.reload();
+      if(response.status === 200){
+        console.log("sekmingai istrintas");
+      }
+        // window.location.reload();
         //this.setState( { errors: response.data.message});
     })
     .catch(err => {
