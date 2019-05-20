@@ -11,6 +11,7 @@ import MainPath from './components/pages/MainPath';
 import SuppliersAdd from './components/forms/SuppliersAdd';
 import ClientsAdd from './components/forms/ClientsAdd';
 import CommentsAdd from './components/forms/CommentsAdd';
+import ReportOrder from './components/reports/ReportOrder';
 
 class App extends Component {
 
@@ -25,7 +26,7 @@ class App extends Component {
             <Route path='/Suppliers/add' component={SuppliersAdd} />
             <Route path='/Clients/add' component={ClientsAdd} />
             <Route path='/Comments/add' component={CommentsAdd} />
-
+            <Route path='/Report/Order' component={ReportOrder} />
       </div>
     );
   }
