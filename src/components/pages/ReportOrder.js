@@ -1,26 +1,55 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Form, Button, Input } from 'semantic-ui-react';
-
-import SemanticDatepicker from 'react-semantic-ui-datepickers';
-import 'react-semantic-ui-datepickers/dist/react-semantic-ui-datepickers.css';
+import { DateInput } from 'semantic-ui-calendar-react';
 
 
 class ReportOrder extends Component {
 
+  state = {
+    FormData: {
+      Pavadinimas: '',
+      Vardas: '',
+      date: '5',
+      DateFrom: ''
+    },
+
+    data:{},
+    errors: {},
+    loading: false
+  };
 
   componentDidMount(){
     this.getItems("");
     window.scrollTo(0, 0);
   }
 
+  onChange = e => this.setState({
+    FormData: { ...this.state.FormData, [e.target.name]: e.target.value}
+  });
+
+  handleChange = e => {
+    console.log(e);
+  }
+  // this.setState(
+  //   console.log(e);
+  //   {FormData: {date: e.target.value}}
+  // );
+
   onSubmit = (e) => {
     e.preventDefault();
-    const errors = this.validate(this.state.data);
-    this.setState({errors});
+    const errors = this.validate(this.state.FormData);
+    //this.setState({errors});
     if(Object.keys(errors).length === 0) {
-      this.getItems(this.state.data);
+      this.setState({ loading: true });
+      this.getItems(this.state.FormData);
     }
+  }
+
+  validate = (data) => {
+    const errors = {};
+    const errText = "Can't be empty";
+    return errors;
   }
 
   getItems = (data) => {
@@ -34,37 +63,52 @@ class ReportOrder extends Component {
       url: `/Report/Order`
     })
     .then(response => {
-      if(response.status === 200)
+      if(response.status === 200){
       console.log(response.data.results);
+      this.setState({data: response.data.results,
+      loading: false})
+      }
+
         // window.history.back();
         // window.location.reload();
         // window.location.replace("/List/Restaurants");
     })
     .catch(err => {
-      this.setState( { errors: err.response.data.errors });
+      this.setState( { errors: err.response.data.errors,
+      loading: false });
     });
   }
-//<Input icon='calendar' iconPosition='left' fluid placeholder='Date to' />
+  //
+  // <Form.Field>
+  //   <label>Date from</label>
+  //   <DateInput
+  //     name='DateFrom'
+  //     placeholder="Date"
+  //     value={FormData.DateFrom}
+  //     iconPosition="left"
+  //     onChange={this.handleChange}
+  //   />
+  // </Form.Field>
   render() {
-
+    const { errors, FormData, loading } = this.state;
     return(
       <React.Fragment>
-        <Form>
+        <Form onSubmit={this.onSubmit} loading={loading}>
           <Form.Group widths='equal'>
-            <Form.Field>
-              <label>Date from</label>
-              <div style={FieldWidth}>
-              <SemanticDatepicker type="basic" />
-              </div>
-            </Form.Field>
+
             <Form.Field>
               <label>Date to</label>
-              <SemanticDatepicker type="basic"></SemanticDatepicker>
-
+              <DateInput
+                name='date'
+                placeholder="DateTime"
+                value={this.state.FormData.date}
+                iconPosition="left"
+                onChange={this.handleChange}
+              />
             </Form.Field>
             <Form.Field>
               <label>Restaurant</label>
-              <Input placeholder='Restaurant'/>
+              <Input name='Pavadinimas' placeholder='Restaurant' onChange={this.onChange}/>
             </Form.Field>
             <Form.Field>
               <label>Client</label>
@@ -78,10 +122,6 @@ class ReportOrder extends Component {
       </React.Fragment>
     );
   }
-}
-
-const FieldWidth = {
-  width: '100%'
 }
 
 export default ReportOrder;

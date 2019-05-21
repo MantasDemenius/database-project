@@ -10,18 +10,20 @@ module.exports = (app, conn) => {
     var DateFrom = '2000-01-01';
     var today = new Date();
     var DateTo = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    if(req.body.Pavadinimas !== undefined){
+    if(req.body.Pavadinimas !== '' && req.body.Pavadinimas !== undefined){
+      console.log("name: ", req.body.Pavadinimas);
       RestaurantName = req.body.Pavadinimas;
     }
-    if(req.body.Vardas !== undefined){
+    if(req.body.Vardas !== undefined && req.body.Vardas !== ''){
       ClientName = req.body.Vardas;
     }
-    if(req.body.DateTo !== undefined){
+    if(req.body.DateTo !== undefined && req.body.DateTo !== ''){
       DateTo = req.body.DateTo;
     }
-    if(req.body.DateFrom !== undefined){
+    if(req.body.DateFrom !== undefined && req.body.DateFrom !== ''){
       DateFrom = req.body.DateFrom
     }
+
     var sql = "\
       SELECT \
         restoranas.Pavadinimas, \
