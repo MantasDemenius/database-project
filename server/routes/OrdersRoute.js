@@ -4,12 +4,28 @@ const path = require('path');
 module.exports = (app, conn) => {
   const messageSuccess = "Restaurant succesfully deleted";
 
-  app.get('/Report/Order', (req, res) => {
-
+  app.post('/Report/Order', (req, res) => {
+    let RestaurantName = '%';
+    let ClientName = '%';
+    var DateFrom = '2000-01-01';
+    var today = new Date();
+    var DateTo = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    if(req.body.Pavadinimas !== undefined){
+      RestaurantName = req.body.Pavadinimas;
+    }
+    if(req.body.Vardas !== undefined){
+      ClientName = req.body.Vardas;
+    }
+    if(req.body.DateTo !== undefined){
+      DateTo = req.body.DateTo;
+    }
+    if(req.body.DateFrom !== undefined){
+      DateFrom = req.body.DateFrom
+    }
     var sql = "\
       SELECT \
         restoranas.Pavadinimas, \
-        IF(uzsakymas.Data>='2018-01-01' AND uzsakymas.Data<='2019-06-20', uzsakymas.Data, NULL) AS 'Data', \
+        IF(uzsakymas.Data>=? AND uzsakymas.Data<=?, uzsakymas.Data, NULL) AS 'Data', \
         klientas.Vardas, \
         COALESCE(patiekalas.name, gerimas.name) AS 'Uzsakymas', \
         uzsakymas.Kaina, \
@@ -37,24 +53,23 @@ module.exports = (app, conn) => {
                    			ON uzsakymas.fk_RESTORANASid_RESTORANAS=restoranas.id_RESTORANAS\
                    		LEFT JOIN klientas\
                    			ON uzsakymas.fk_KLIENTASid_KLIENTAS=klientas.id_KLIENTAS\
-                   WHERE uzsakymas.Data>='2018-01-01' \
-    			   		AND uzsakymas.Data<='2019-05-20' \
-        				AND restoranas.Pavadinimas LIKE '%' \
-        				AND klientas.Vardas LIKE '%'\
+                   WHERE uzsakymas.Data>= ?\
+    			   		AND uzsakymas.Data<=? \
+        				AND restoranas.Pavadinimas LIKE ? \
+        				AND klientas.Vardas LIKE ?\
                    GROUP BY restoranas.Pavadinimas\
             	) restoranas \
                 	ON uzsakymas.fk_RESTORANASid_RESTORANAS=restoranas.id_RESTORANAS\
-        WHERE restoranas.Pavadinimas LIKE '%' \
-        AND klientas.Vardas LIKE '%'\
+        WHERE restoranas.Pavadinimas LIKE ? \
+        AND klientas.Vardas LIKE ?\
     	ORDER BY restoranas.Pavadinimas ASC, uzsakymas.Data ASC, klientas.Vardas ASC";
 
-    conn.query(sql, (err, data) => {
+    conn.query(sql, [DateFrom, DateTo, DateFrom, DateTo, RestaurantName, ClientName, RestaurantName, ClientName], (err, data) => {
       if (err) {
         console.log(err);
         res.status(500).json({ errors: {globalErr: err } });
       }
       else{
-        console.log(data);
         res.status(200).json({results: data})
       }
     });
