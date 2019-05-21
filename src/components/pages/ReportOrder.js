@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Form, Button, Input } from 'semantic-ui-react';
+import { Form, Button, Input, Icon } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
+import ReportOrderItem from '../items/ReportOrderItem';
 
 
 class ReportOrder extends Component {
@@ -10,11 +11,10 @@ class ReportOrder extends Component {
     FormData: {
       Pavadinimas: '',
       Vardas: '',
-      date: '5',
+      DateTo: '',
       DateFrom: ''
     },
-
-    data:{},
+    data:[],
     errors: {},
     loading: false
   };
@@ -24,17 +24,10 @@ class ReportOrder extends Component {
     window.scrollTo(0, 0);
   }
 
-  onChange = e => this.setState({
-    FormData: { ...this.state.FormData, [e.target.name]: e.target.value}
-  });
-
-  handleChange = e => {
-    console.log(e);
-  }
-  // this.setState(
-  //   console.log(e);
-  //   {FormData: {date: e.target.value}}
-  // );
+  onChange = (e, {name, value}) => {
+    this.setState({
+    FormData: { ...this.state.FormData, [name]: value}
+  });}
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -78,47 +71,51 @@ class ReportOrder extends Component {
       loading: false });
     });
   }
-  //
-  // <Form.Field>
-  //   <label>Date from</label>
-  //   <DateInput
-  //     name='DateFrom'
-  //     placeholder="Date"
-  //     value={FormData.DateFrom}
-  //     iconPosition="left"
-  //     onChange={this.handleChange}
-  //   />
-  // </Form.Field>
+
   render() {
     const { errors, FormData, loading } = this.state;
     return(
       <React.Fragment>
         <Form onSubmit={this.onSubmit} loading={loading}>
           <Form.Group widths='equal'>
-
+          <Form.Field>
+            <label>Date from</label>
+            <DateInput
+              name='DateFrom'
+              placeholder="Date from"
+              dateFormat="YYYY-MM-DD"
+              clearable
+              clearIcon={<Icon name="remove" color="red" />}
+              value={FormData.DateFrom}
+              iconPosition="left"
+              onChange={this.onChange}
+            />
+          </Form.Field>
             <Form.Field>
               <label>Date to</label>
               <DateInput
-                name='date'
-                placeholder="DateTime"
-                value={this.state.FormData.date}
+                name='DateTo'
+                placeholder="Date to"
+                dateFormat="YYYY-MM-DD"
+                clearable
+                clearIcon={<Icon name="remove" color="red" />}
+                value={FormData.DateTo}
                 iconPosition="left"
-                onChange={this.handleChange}
+                onChange={this.onChange}
               />
             </Form.Field>
             <Form.Field>
               <label>Restaurant</label>
-              <Input name='Pavadinimas' placeholder='Restaurant' onChange={this.onChange}/>
+              <Input name='Pavadinimas' placeholder='Name' onChange={this.onChange}/>
             </Form.Field>
             <Form.Field>
               <label>Client</label>
-              <Input placeholder='Client'/>
+              <Input name="Vardas" placeholder='Name' onChange={this.onChange}/>
             </Form.Field>
-
           </Form.Group>
           <Button type='submit'>Filter</Button>
-
         </Form>
+        <ReportOrderItem items={this.state.data}/>
       </React.Fragment>
     );
   }

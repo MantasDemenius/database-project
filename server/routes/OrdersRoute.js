@@ -11,7 +11,6 @@ module.exports = (app, conn) => {
     var today = new Date();
     var DateTo = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     if(req.body.Pavadinimas !== '' && req.body.Pavadinimas !== undefined){
-      console.log("name: ", req.body.Pavadinimas);
       RestaurantName = req.body.Pavadinimas;
     }
     if(req.body.Vardas !== undefined && req.body.Vardas !== ''){
@@ -23,11 +22,11 @@ module.exports = (app, conn) => {
     if(req.body.DateFrom !== undefined && req.body.DateFrom !== ''){
       DateFrom = req.body.DateFrom
     }
-
     var sql = "\
       SELECT \
+        uzsakymas.id_UZSAKYMAS, \
         restoranas.Pavadinimas, \
-        IF(uzsakymas.Data>=? AND uzsakymas.Data<=?, uzsakymas.Data, NULL) AS 'Data', \
+        uzsakymas.Data, \
         klientas.Vardas, \
         COALESCE(patiekalas.name, gerimas.name) AS 'Uzsakymas', \
         uzsakymas.Kaina, \
@@ -62,11 +61,13 @@ module.exports = (app, conn) => {
                    GROUP BY restoranas.Pavadinimas\
             	) restoranas \
                 	ON uzsakymas.fk_RESTORANASid_RESTORANAS=restoranas.id_RESTORANAS\
-        WHERE restoranas.Pavadinimas LIKE ? \
+        WHERE uzsakymas.Data>= ?\
+        AND uzsakymas.Data<=? \
+        AND restoranas.Pavadinimas LIKE ? \
         AND klientas.Vardas LIKE ?\
     	ORDER BY restoranas.Pavadinimas ASC, uzsakymas.Data ASC, klientas.Vardas ASC";
 
-    conn.query(sql, [DateFrom, DateTo, DateFrom, DateTo, RestaurantName, ClientName, RestaurantName, ClientName], (err, data) => {
+    conn.query(sql, [DateFrom, DateTo, RestaurantName, ClientName, DateFrom, DateTo, RestaurantName, ClientName], (err, data) => {
       if (err) {
         console.log(err);
         res.status(500).json({ errors: {globalErr: err } });
