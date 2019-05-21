@@ -50,6 +50,7 @@ require('./routes/RestaurantsRoute')(app, conn);
 require('./routes/SuppliersRoute')(app, conn);
 require('./routes/ClientsRoute')(app, conn);
 require('./routes/CommentsRoute')(app, conn);
+require('./routes/OrdersRoute')(app, conn);
 
 // Handles any requests that don't match the ones above
 // app.get('*', (req,res) =>{

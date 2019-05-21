@@ -48,12 +48,12 @@ class ImoneAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Companies/add`
+      url: `/List/Companies/add`
     })
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/Companies`);
+        this.props.history.push(`/List/Companies`);
         window.location.reload();
 
     })
@@ -68,7 +68,7 @@ class ImoneAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Companies`);
+    this.props.history.push(`/List/Companies`);
   }
 
 

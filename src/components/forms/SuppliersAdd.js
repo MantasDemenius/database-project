@@ -63,12 +63,12 @@ class SuppliersAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Suppliers/add`
+      url: `/List/Suppliers/add`
     })
     .then(response => {
       if(response.status === 200)
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/Suppliers`);
+        this.props.history.push(`/List/Suppliers`);
         window.location.reload();
     })
     .catch(err => {
@@ -78,7 +78,7 @@ class SuppliersAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Suppliers`);
+    this.props.history.push(`/List/Suppliers`);
   }
 
   render () {

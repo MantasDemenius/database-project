@@ -57,13 +57,13 @@ class SuppliersEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Clients/edit`
+      url: `/List/Clients/edit`
     })
     .then(response => {
       if(response.status === 200)
         // window.history.back();
         // window.location.reload();
-        window.location.replace("/Clients");
+        window.location.replace("/List/Clients");
 
     })
     .catch(err => {

@@ -6,7 +6,7 @@ class ReportOrder extends Component {
 
     return(
       <React.Fragment>
-
+        
       </React.Fragment>
     );
   }
