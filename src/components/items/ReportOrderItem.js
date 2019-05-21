@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { Table,  } from 'semantic-ui-react';
 
 
-// {items.map(item =>
-//   <div key={item.id_UZSAKYMAS}>{item.id_UZSAKYMAS}</div>
-// )}
+// <Table.Cell>{item.Data}</Table.Cell>
+// <Table.Cell>{item.Vardas}</Table.Cell>
+// <Table.Cell>{item.Uzsakymas}</Table.Cell>
+// <Table.Cell>{item.Kaina}</Table.Cell>
+// <Table.Cell>{item.Arbatpinigiai}</Table.Cell>
 const ReportOrderItem = ({items}) => (
   <Table striped singleLine>
     <Table.Header>
@@ -20,16 +22,13 @@ const ReportOrderItem = ({items}) => (
     </Table.Header>
 
     <Table.Body>
-      {items.map(item  =>
+      {for(var i = 0; i < items.length; i++){
       <Table.Row key={item.id_UZSAKYMAS}>
-        <Table.Cell>{item.Pavadinimas}</Table.Cell>
-        <Table.Cell>{item.Data}</Table.Cell>
-        <Table.Cell>{item.Vardas}</Table.Cell>
-        <Table.Cell>{item.Uzsakymas}</Table.Cell>
-        <Table.Cell>{item.Kaina}</Table.Cell>
-        <Table.Cell>{item.Arbatpinigiai}</Table.Cell>
+        <Table.Cell>{item[i].Pavadinimas}</Table.Cell>
+
       </Table.Row>
-      )}
+      }
+    }
     </Table.Body>
   </Table>
 
