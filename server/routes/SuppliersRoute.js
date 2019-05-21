@@ -5,14 +5,14 @@ module.exports = (app, conn) => {
   const messageSuccess = "Irasas sekmingai istrintas";
 
 
-  app.get('/Suppliers', (req, res) => {
+  app.get('/List/Suppliers', (req, res) => {
     conn.query("SELECT * FROM tiekejas", (err, data) => {
       if (err) throw err;
       res.json({results: data});
     });
   });
 
-  app.post('/Suppliers/del', (req, res) => {
+  app.post('/List/Suppliers/del', (req, res) => {
     let id = req.query.id;
     conn.query("Delete FROM tiekejas WHERE id_TIEKEJAS = " + mysql.escape(id), (err, data) => {
       if (err) {
@@ -24,7 +24,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.post('/Suppliers/edit', (req, res) => {
+  app.post('/List/Suppliers/edit', (req, res) => {
     var sql = "UPDATE tiekejas SET \
     Pavadinimas = ?, \
     Telefono_numeris = ?, \
@@ -55,7 +55,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.post('/Suppliers/add', (req, res) => {
+  app.post('/List/Suppliers/add', (req, res) => {
     var sql = "INSERT INTO tiekejas (\
       Pavadinimas, \
       Telefono_numeris, \

@@ -13,12 +13,12 @@ function Header() {
           <h1><Link to="/">Duomenų bazių antrasis laboratorinis darbas</Link></h1>
         </Segment>
           <Menu fluid widths={6}>
-            <Menu.Item name="Companies" as={Link} to="/Companies"></Menu.Item>
-            <Menu.Item  name="Restaurants" as={Link} to="/Restaurants"></Menu.Item>
+            <Menu.Item name="Companies" as={Link} to="/List/Companies"></Menu.Item>
+            <Menu.Item  name="Restaurants" as={Link} to="/List/Restaurants"></Menu.Item>
             {/*<Menu.Item><Link to="/Employees">Employees</Link></Menu.Item>*/}
-          <Menu.Item name="Suppliers" as={Link} to="/Suppliers"></Menu.Item>
-            <Menu.Item name="Comments" as={Link} to="/Comments"></Menu.Item>
-            <Menu.Item name="Clients" as={Link} to="/Clients"></Menu.Item>
+          <Menu.Item name="Suppliers" as={Link} to="/List/Suppliers"></Menu.Item>
+            <Menu.Item name="Comments" as={Link} to="/List/Comments"></Menu.Item>
+            <Menu.Item name="Clients" as={Link} to="/List/Clients"></Menu.Item>
               <Dropdown item text='Reports'>
                 <Dropdown.Menu>
                   <Dropdown.Item style={dropdownItem} as={Link} to="/Report/Order">Order</Dropdown.Item>

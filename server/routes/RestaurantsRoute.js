@@ -5,7 +5,7 @@ module.exports = (app, conn) => {
   const messageSuccess = "Restaurant succesfully deleted";
 
 
-  app.get('/Restaurants', (req, res) => {
+  app.get('/List/Restaurants', (req, res) => {
     var sql = "SELECT restoranas.id_RESTORANAS, \
     imone.id_IMONE, \
     imone.Pavadinimas AS IPavadinimas, \
@@ -23,7 +23,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.post('/Restaurants/del', (req, res) => {
+  app.post('/List/Restaurants/del', (req, res) => {
     let id = req.query.id;
     conn.query("DELETE FROM fk_teikia WHERE fk_RESTORANASid_RESTORANAS = " + mysql.escape(id), (err, data) => {
       if (err) {
@@ -43,7 +43,7 @@ module.exports = (app, conn) => {
 
   });
 
-  app.post('/Restaurants/edit', (req, res) => {
+  app.post('/List/Restaurants/edit', (req, res) => {
     var sql = "UPDATE restoranas SET \
     fk_IMONEid_IMONE = ?, \
     Pavadinimas = ?, \
@@ -91,7 +91,7 @@ module.exports = (app, conn) => {
       });
   });
 
-  app.post('/Restaurants/add', (req, res) => {
+  app.post('/List/Restaurants/add', (req, res) => {
     var sql = "INSERT INTO restoranas (\
       fk_IMONEid_IMONE, \
       Pavadinimas, \
@@ -135,7 +135,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.get('/Restaurants/suppliers', (req, res) => {
+  app.get('/List/Restaurants/suppliers', (req, res) => {
     var sql = "SELECT \
     fk_RESTORANASid_RESTORANAS as fk_RESTORANAS, \
     fk_TIEKEJASid_TIEKEJAS as fk_TIEKEJAS \
