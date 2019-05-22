@@ -15,6 +15,7 @@ class ReportOrder extends Component {
       DateFrom: ''
     },
     data:[],
+    finalData:[],
     errors: {},
     loading: false
   };
@@ -61,15 +62,33 @@ class ReportOrder extends Component {
       this.setState({data: response.data.results,
       loading: false})
       }
-
-        // window.history.back();
-        // window.location.reload();
-        // window.location.replace("/List/Restaurants");
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors,
       loading: false });
     });
+
+    axios({
+      method: 'post',
+      data: data,
+      headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    },
+      url: `/Report/Order/Sum`
+    })
+    .then(response => {
+      if(response.status === 200){
+      console.log(response.data.results);
+      this.setState({finalData: response.data.results,
+      loading: false})
+      }
+    })
+    .catch(err => {
+      this.setState( { errors: err.response.data.errors,
+      loading: false });
+    });
+
   }
 
   render() {
@@ -86,6 +105,7 @@ class ReportOrder extends Component {
               dateFormat="YYYY-MM-DD"
               clearable
               clearIcon={<Icon name="remove" color="red" />}
+              autoComplete="off"
               value={FormData.DateFrom}
               iconPosition="left"
               onChange={this.onChange}
@@ -99,6 +119,7 @@ class ReportOrder extends Component {
                 dateFormat="YYYY-MM-DD"
                 clearable
                 clearIcon={<Icon name="remove" color="red" />}
+                autoComplete="off"
                 value={FormData.DateTo}
                 iconPosition="left"
                 onChange={this.onChange}
@@ -115,7 +136,7 @@ class ReportOrder extends Component {
           </Form.Group>
           <Button type='submit'>Filter</Button>
         </Form>
-        <ReportOrderItem items={this.state.data}/>
+        <ReportOrderItem items={this.state.data} finalItems={this.state.finalData}/>
       </React.Fragment>
     );
   }

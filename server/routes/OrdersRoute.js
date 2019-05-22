@@ -11,10 +11,10 @@ module.exports = (app, conn) => {
     var today = new Date();
     var DateTo = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     if(req.body.Pavadinimas !== '' && req.body.Pavadinimas !== undefined){
-      RestaurantName = req.body.Pavadinimas;
+      RestaurantName = '%'+req.body.Pavadinimas+'%';
     }
     if(req.body.Vardas !== undefined && req.body.Vardas !== ''){
-      ClientName = req.body.Vardas;
+      ClientName = '%'+req.body.Vardas+'%';
     }
     if(req.body.DateTo !== undefined && req.body.DateTo !== ''){
       DateTo = req.body.DateTo;
@@ -77,5 +77,45 @@ module.exports = (app, conn) => {
       }
     });
   });
+
+app.post('/Report/Order/Sum', (req, res) => {
+  let RestaurantName = '%';
+  let ClientName = '%';
+  var DateFrom = '2000-01-01';
+  var today = new Date();
+  var DateTo = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  if(req.body.Pavadinimas !== '' && req.body.Pavadinimas !== undefined){
+    RestaurantName = '%'+req.body.Pavadinimas+'%';
+  }
+  if(req.body.Vardas !== undefined && req.body.Vardas !== ''){
+    ClientName = '%'+req.body.Vardas+'%';
+  }
+  if(req.body.DateTo !== undefined && req.body.DateTo !== ''){
+    DateTo = req.body.DateTo;
+  }
+  if(req.body.DateFrom !== undefined && req.body.DateFrom !== ''){
+    DateFrom = req.body.DateFrom
+  }
+  var sql = "\
+  SELECT ROUND(SUM(uzsakymas.Kaina), 2) as 'Kaina', ROUND(SUM(uzsakymas.Arbatpinigiai), 2) as 'Arbatpinigiai' \
+    FROM uzsakymas\
+    LEFT JOIN restoranas\
+      ON uzsakymas.fk_RESTORANASid_RESTORANAS=restoranas.id_RESTORANAS\
+    LEFT JOIN klientas\
+      ON uzsakymas.fk_KLIENTASid_KLIENTAS=klientas.id_KLIENTAS\
+  WHERE uzsakymas.Data>=? \
+    	AND uzsakymas.Data<=? \
+      AND restoranas.Pavadinimas LIKE ? \
+      AND klientas.Vardas LIKE ?"
+
+  conn.query(sql, [DateFrom, DateTo, RestaurantName, ClientName], (err, data) => {
+    if (err) {
+      res.status(500).json({ errors: {globalErr: err } });
+    }
+    else{
+      res.status(200).json({results: data})
+    }
+  });
+});
 
 }
