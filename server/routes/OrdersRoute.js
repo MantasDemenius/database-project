@@ -97,7 +97,7 @@ app.post('/Report/Order/Sum', (req, res) => {
     DateFrom = req.body.DateFrom
   }
   var sql = "\
-  SELECT ROUND(SUM(uzsakymas.Kaina), 2) as 'Kaina', ROUND(SUM(uzsakymas.Arbatpinigiai), 2) as 'Arbatpinigiai' \
+  SELECT COUNT(uzsakymas.id_UZSAKYMAS) as Kiekis, ROUND(SUM(uzsakymas.Kaina), 2) as 'Full_Kaina', ROUND(SUM(uzsakymas.Arbatpinigiai), 2) as 'Full_Arbatpinigiai' \
     FROM uzsakymas\
     LEFT JOIN restoranas\
       ON uzsakymas.fk_RESTORANASid_RESTORANAS=restoranas.id_RESTORANAS\

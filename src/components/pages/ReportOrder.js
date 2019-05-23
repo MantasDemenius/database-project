@@ -8,14 +8,18 @@ import ReportOrderItem from '../items/ReportOrderItem';
 class ReportOrder extends Component {
 
   state = {
-    FormData: {
+    formData: {
       Pavadinimas: '',
       Vardas: '',
       DateTo: '',
       DateFrom: ''
     },
     data:[],
-    finalData:[],
+    finalData: {
+      Full_Kaina: '',
+      Full_Arbatpinigiai: '',
+      Kiekis: ''
+    },
     errors: {},
     loading: false
   };
@@ -27,22 +31,22 @@ class ReportOrder extends Component {
 
   onChange = (e, {name, value}) => {
     this.setState({
-    FormData: { ...this.state.FormData, [name]: value}
+    formData: { ...this.state.formData, [name]: value}
   });}
 
   onSubmit = (e) => {
     e.preventDefault();
-    const errors = this.validate(this.state.FormData);
+    const errors = this.validate(this.state.formData);
     //this.setState({errors});
     if(Object.keys(errors).length === 0) {
       this.setState({ loading: true });
-      this.getItems(this.state.FormData);
+      this.getItems(this.state.formData);
     }
   }
 
   validate = (data) => {
     const errors = {};
-    const errText = "Can't be empty";
+    // const errText = "Can't be empty";
     return errors;
   }
 
@@ -79,8 +83,7 @@ class ReportOrder extends Component {
     })
     .then(response => {
       if(response.status === 200){
-      console.log(response.data.results);
-      this.setState({finalData: response.data.results,
+      this.setState({finalData: response.data.results[0],
       loading: false})
       }
     })
@@ -92,7 +95,7 @@ class ReportOrder extends Component {
   }
 
   render() {
-    const { errors, FormData, loading } = this.state;
+    const { formData, loading } = this.state;
     return(
       <React.Fragment>
         <Form onSubmit={this.onSubmit} loading={loading}>
@@ -106,7 +109,7 @@ class ReportOrder extends Component {
               clearable
               clearIcon={<Icon name="remove" color="red" />}
               autoComplete="off"
-              value={FormData.DateFrom}
+              value={formData.DateFrom}
               iconPosition="left"
               onChange={this.onChange}
             />
@@ -120,7 +123,7 @@ class ReportOrder extends Component {
                 clearable
                 clearIcon={<Icon name="remove" color="red" />}
                 autoComplete="off"
-                value={FormData.DateTo}
+                value={formData.DateTo}
                 iconPosition="left"
                 onChange={this.onChange}
               />
@@ -135,8 +138,10 @@ class ReportOrder extends Component {
             </Form.Field>
           </Form.Group>
           <Button type='submit'>Filter</Button>
+          
         </Form>
-        <ReportOrderItem items={this.state.data} finalItems={this.state.finalData}/>
+        {this.state.finalData.Kiekis !== 0 ? <ReportOrderItem items={this.state.data} finalItems={this.state.finalData}/> : <h1>No data was found</h1>}
+
       </React.Fragment>
     );
   }
