@@ -3,7 +3,7 @@ import React from 'react';
 function Index() {
     return (
       <div >
-        <h1>Heroku crashes randomly, usually because of inactivity. Sometimes it restarts itself after a few seconds</h1>
+        <h1>Mysql closes the connection, it takes about 2000ms for it to reconnect, Please wait </h1>
 
       </div>
     )
