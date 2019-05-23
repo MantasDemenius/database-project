@@ -55,13 +55,13 @@ class ImoneEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Companies/edit`
+      url: `/List/Companies/edit`
     })
     .then(response => {
       if(response.status === 200)
         // window.history.back();
         // window.location.reload();
-        window.location.replace("/Companies");
+        window.location.replace("/List/Companies");
 
     })
     .catch(err => {

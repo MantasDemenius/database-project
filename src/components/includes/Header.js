@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu, Segment, Dropdown } from 'semantic-ui-react'
+
+// <Link to="/Comments">Comments</Link> <Link to="/Clients">Clients</Link>
+
 
 
 function Header() {
@@ -9,17 +12,27 @@ function Header() {
         <Segment textAlign='center' attached='top'>
           <h1><Link to="/">Duomenų bazių antrasis laboratorinis darbas</Link></h1>
         </Segment>
-          <Menu fluid widths={5}>
-            <Menu.Item><Link to="/Companies" >Companies</Link></Menu.Item>
-            <Menu.Item><Link to="/Restaurants"  >Restaurants</Link></Menu.Item>
+          <Menu fluid widths={6}>
+            <Menu.Item name="Companies" as={Link} to="/List/Companies"></Menu.Item>
+            <Menu.Item  name="Restaurants" as={Link} to="/List/Restaurants"></Menu.Item>
             {/*<Menu.Item><Link to="/Employees">Employees</Link></Menu.Item>*/}
-            <Menu.Item><Link to="/Suppliers">Suppliers</Link></Menu.Item>
-            <Menu.Item><Link to="/Comments">Comments</Link></Menu.Item>
-            <Menu.Item><Link to="/Clients">Clients</Link></Menu.Item>
+          <Menu.Item name="Suppliers" as={Link} to="/List/Suppliers"></Menu.Item>
+            <Menu.Item name="Comments" as={Link} to="/List/Comments"></Menu.Item>
+            <Menu.Item name="Clients" as={Link} to="/List/Clients"></Menu.Item>
+              <Dropdown item text='Reports'>
+                <Dropdown.Menu>
+                  <Dropdown.Item style={dropdownItem} as={Link} to="/Report/Order">Order</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+
             {/*<Menu.Item><Link to="/Orders">Orders</Link></Menu.Item>*/}
           </Menu>
       </header>
     );
+}
+
+const dropdownItem = {
+  textAlign:'center'
 }
 
 export default Header;

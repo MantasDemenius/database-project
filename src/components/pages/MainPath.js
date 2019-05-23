@@ -71,23 +71,23 @@ class MainPath extends Component {
   RouteCheck = (prop) => {
     const location = prop.location;
       switch(location){
-        case "/Companies":
+        case "/List/Companies":
           return (<Route path={`${location}`} render={props => (
                   <CompaniesItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/Restaurants":
+        case "/List/Restaurants":
           return (<Route path={`${location}`} render={props => (
                   <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel}/>
           )} />)
-        case "/Suppliers":
+        case "/List/Suppliers":
           return (<Route path={`${location}`} render={props => (
                   <SuppliersItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/Clients":
+        case "/List/Clients":
           return (<Route path={`${location}`} render={props => (
                   <ClientsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/Comments":
+        case "/List/Comments":
           return (<Route path={`${location}`} render={props => (
                   <CommentsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)

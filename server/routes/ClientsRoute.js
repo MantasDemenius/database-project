@@ -5,14 +5,14 @@ module.exports = (app, conn) => {
   const messageSuccess = "Restaurant succesfully deleted";
 
 
-  app.get('/Clients', (req, res) => {
+  app.get('/List/Clients', (req, res) => {
     conn.query("SELECT * FROM klientas", (err, data) => {
       if (err) throw err;
       res.json({results: data});
     });
   });
 
-  app.post('/Clients/del', (req, res) => {
+  app.post('/List/Clients/del', (req, res) => {
     let id = req.query.id;
     conn.query("Delete FROM klientas WHERE id_KLIENTAS = " + mysql.escape(id), (err, data) => {
       if (err) {
@@ -24,7 +24,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.post('/Clients/edit', (req, res) => {
+  app.post('/List/Clients/edit', (req, res) => {
     var sql = "UPDATE klientas SET \
     Vardas = ?, \
     Telefono_numeris = ?, \
@@ -46,7 +46,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.post('/Clients/add', (req, res) => {
+  app.post('/List/Clients/add', (req, res) => {
     var sql = "INSERT INTO klientas (\
       Vardas, \
       Adresas, \

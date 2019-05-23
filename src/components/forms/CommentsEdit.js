@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Form, Button, Message } from 'semantic-ui-react'
 import InLineError from '../messages/InLineError';
 import '../../style/modalContentStyle.css';
-import Validator from 'validator';
 import DatabaseBoxError from '../messages/DatabaseBoxError'
 
 class CommentEdit extends Component {
@@ -62,13 +61,13 @@ class CommentEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Comments/edit`
+      url: `/List/Comments/edit`
     })
     .then(response => {
       if(response.status === 200)
         // window.history.back();
         // window.location.reload();
-        window.location.replace("/Comments");
+        window.location.replace("/List/Comments");
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors });

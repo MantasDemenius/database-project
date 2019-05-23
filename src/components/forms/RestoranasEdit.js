@@ -20,8 +20,8 @@ class RestoranasEdit extends Component {
           Vadovo_pavarde: props.Vadovo_pavarde || '',
           Vadovo_telefono_numeris: props.Vadovo_telefono_numeris || '',
           Vadovo_pastas: props.Vadovo_pastas || '',
-          Imone: '' || props.id_IMONE,
-          Tiekejas: '' || props.ResSuppItems.fk_TIEKEJAS
+          Imone: props.id_IMONE || '',
+          Tiekejas: props.ResSuppItems.fk_TIEKEJAS || ''
         },
         errors: {}
 
@@ -69,13 +69,13 @@ class RestoranasEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Restaurants/edit`
+      url: `/List/Restaurants/edit`
     })
     .then(response => {
       if(response.status === 200)
         // window.history.back();
         // window.location.reload();
-        window.location.replace("/Restaurants");
+        window.location.replace("/List/Restaurants");
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors });

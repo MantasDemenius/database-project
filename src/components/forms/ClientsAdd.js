@@ -55,13 +55,15 @@ class ClientsAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Clients/add`
+      url: `/List/Clients/add`
     })
     .then(response => {
-      if(response.status === 200)
+      if(response.status === 200){
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/Clients`);
+        this.props.history.push(`/List/Clients`);
         window.location.reload();
+      }
+
     })
     .catch(err => {
       this.setState( { errors: err.response.data.errors });
@@ -70,7 +72,7 @@ class ClientsAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Clients`);
+    this.props.history.push(`/List/Clients`);
   }
 
   render () {

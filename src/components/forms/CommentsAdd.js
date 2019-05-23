@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button, Message, Input } from 'semantic-ui-react';
+import { Form, Button, Message } from 'semantic-ui-react';
 import InLineError from '../messages/InLineError';
 import '../../style/modalContentStyle.css';
 import axios from 'axios';
@@ -96,10 +96,10 @@ class CommentsAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Comments/add`
+      url: `/List/Comments/add`
     })
     .then(response => {
-        this.props.history.push(`/Comments`);
+        this.props.history.push(`/List/Comments`);
         window.location.reload();
 
     })
@@ -110,12 +110,12 @@ class CommentsAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Comments`);
+    this.props.history.push(`/List/Comments`);
   }
 
   getDropdown = _ => {
     //Get restaurants info
-    axios.get('/Restaurants')
+    axios.get('/List/Restaurants')
     .then(response => {
       this.setState({
         RestaurantItems: response.data.results
@@ -123,7 +123,7 @@ class CommentsAdd extends Component {
     })
     .catch(error => console.log(error));
     //Get clients info
-    axios.get('/Clients')
+    axios.get('/List/Clients')
     .then(response => {
       this.setState({
         ClientItems: response.data.results
@@ -193,7 +193,7 @@ class CommentsAdd extends Component {
                       </Form.Field>
                     </div>
 
-                    <a href="" onMouseDown={this.handleNew}>Click to add a client</a>
+                    <Button type="button" onMouseDown={this.handleNew}>Click to add a client</Button>
 
 
                   <Form.Field error={!!errors.Komentaras}>

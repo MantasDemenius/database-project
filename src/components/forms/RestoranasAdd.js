@@ -66,10 +66,10 @@ class RestoranasAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `/Restaurants/add`
+      url: `/List/Restaurants/add`
     })
     .then(response => {
-        this.props.history.push(`/Restaurants`);
+        this.props.history.push(`/List/Restaurants`);
         window.location.reload();
 
     })
@@ -80,18 +80,18 @@ class RestoranasAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/Restaurants`);
+    this.props.history.push(`/List/Restaurants`);
   }
 
   getDropdown = _ => {
-    axios.get('/Companies')
+    axios.get('/List/Companies')
     .then(response => {
       this.setState({
         CompanyItems: response.data.results
       });
     })
     .catch(error => console.log(error));
-    axios.get('/Suppliers')
+    axios.get('/List/Suppliers')
     .then(response => {
       this.setState({
         SupplierItems: response.data.results

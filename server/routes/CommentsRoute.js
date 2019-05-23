@@ -5,7 +5,7 @@ module.exports = (app, conn) => {
   const messageSuccess = "Restaurant succesfully deleted";
 
 
-  app.get('/Comments', (req, res) => {
+  app.get('/List/Comments', (req, res) => {
     // var sql = "SELECT atsiliepimas.id_ATSILIEPIMAS, \
     // restoranas.Pavadinimas as RPavadinimas, \
     // restoranas.id_RESTORANAS, \
@@ -41,7 +41,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.post('/Comments/del', (req, res) => {
+  app.post('/List/Comments/del', (req, res) => {
     let id = req.query.id;
     conn.query("Delete FROM atsiliepimas WHERE id_ATSILIEPIMAS = " + mysql.escape(id), (err, data) => {
       if (err) {
@@ -53,7 +53,7 @@ module.exports = (app, conn) => {
     });
   });
 
-  app.post('/Comments/edit', (req, res) => {
+  app.post('/List/Comments/edit', (req, res) => {
     var sql = "UPDATE atsiliepimas SET \
     fk_RESTORANASid_RESTORANAS = ?, \
     fk_KLIENTASid_KLIENTAS = ?, \
@@ -76,9 +76,10 @@ module.exports = (app, conn) => {
         res.sendStatus(200);
       }
     });
+
   });
 
-  app.post('/Comments/add', (req, res) => {
+  app.post('/List/Comments/add', (req, res) => {
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     console.log(req.body);
