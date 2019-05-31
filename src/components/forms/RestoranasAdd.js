@@ -66,7 +66,7 @@ class RestoranasAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Restaurants/add`
+      url: `https://database-project-server.herokuapp.com/database-project/Restaurants/add`
     })
     .then(response => {
       if(response.status === 200){
@@ -87,14 +87,14 @@ class RestoranasAdd extends Component {
   }
 
   getDropdown = _ => {
-    axios.get('https://desolate-scrubland-14964.herokuapp.com/database-project/Companies')
+    axios.get('https://database-project-server.herokuapp.com/database-project/Companies')
     .then(response => {
       this.setState({
         CompanyItems: response.data.results
       });
     })
     .catch(error => console.log(error));
-    axios.get('https://desolate-scrubland-14964.herokuapp.com/database-project/Suppliers')
+    axios.get('https://database-project-server.herokuapp.com/database-project/Suppliers')
     .then(response => {
       this.setState({
         SupplierItems: response.data.results

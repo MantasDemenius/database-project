@@ -63,7 +63,7 @@ class SuppliersAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Suppliers/add`
+      url: `https://database-project-server.herokuapp.com/database-project/Suppliers/add`
     })
     .then(response => {
       if(response.status === 200){

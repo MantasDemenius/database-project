@@ -57,7 +57,7 @@ class SuppliersEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://desolate-scrubland-14964.herokuapp.com/database-project/Clients/edit`
+      url: `https://database-project-server.herokuapp.com/database-project/Clients/edit`
     })
     .then(response => {
       if(response.status === 200){

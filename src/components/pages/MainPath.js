@@ -39,8 +39,9 @@ class MainPath extends Component {
   }
 
 //https://desolate-scrubland-14964.herokuapp.com
+//https://database-project-server.herokuapp.com
   getItems = (url) => {
-    axios.get(`https://desolate-scrubland-14964.herokuapp.com${url}`)
+    axios.get(`https://database-project-server.herokuapp.com${url}`)
     .then(response => {
       this.setState({items: response.data.results});
       console.log("getitems: ", this.state.items);
@@ -56,7 +57,7 @@ class MainPath extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://desolate-scrubland-14964.herokuapp.com${this.state.url}/del?id=${id}`
+      url: `https://database-project-server.herokuapp.com${this.state.url}/del?id=${id}`
     })
     .then(response => {
       if(response.status === 200){
