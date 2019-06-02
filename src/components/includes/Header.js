@@ -7,7 +7,7 @@ function Header() {
     return (
       <header>
         <Segment textAlign='center' attached='top'>
-          <h1><Link to="/database-project/">Duomenų bazių antrasis laboratorinis darbas</Link></h1>
+          <h1><Link to="/database-project/">Database project for displaying and modifying it's information</Link></h1>
         </Segment>
           <Menu fluid widths={6}>
             <Menu.Item name="Companies" as={Link} to="/database-project/List/Companies"></Menu.Item>
