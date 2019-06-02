@@ -55,7 +55,7 @@ class ImoneEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://database-project-server.herokuapp.com/database-project/Companies/edit`
+      url: `https://database-project-server.herokuapp.com/database-project/List/Companies/edit`
     })
     .then(response => {
       // if(response.status === 200)

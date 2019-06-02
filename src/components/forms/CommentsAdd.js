@@ -96,7 +96,7 @@ class CommentsAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://database-project-server.herokuapp.com/database-project/Comments/add`
+      url: `https://database-project-server.herokuapp.com/database-project/List/Comments/add`
     })
     .then(response => {
       if(response.status === 200){
@@ -117,7 +117,7 @@ class CommentsAdd extends Component {
 
   getDropdown = _ => {
     //Get restaurants info
-    axios.get('https://database-project-server.herokuapp.com/database-project/Restaurants')
+    axios.get('https://database-project-server.herokuapp.com/database-project/List/Restaurants')
     .then(response => {
       this.setState({
         RestaurantItems: response.data.results
@@ -125,7 +125,7 @@ class CommentsAdd extends Component {
     })
     .catch(error => console.log(error));
     //Get clients info
-    axios.get('https://database-project-server.herokuapp.com/database-project/Clients')
+    axios.get('https://database-project-server.herokuapp.com/database-project/List/Clients')
     .then(response => {
       this.setState({
         ClientItems: response.data.results

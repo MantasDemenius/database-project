@@ -57,7 +57,7 @@ class SuppliersEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://database-project-server.herokuapp.com/database-project/Clients/edit`
+      url: `https://database-project-server.herokuapp.com/database-project/List/Clients/edit`
     })
     .then(response => {
       if(response.status === 200){

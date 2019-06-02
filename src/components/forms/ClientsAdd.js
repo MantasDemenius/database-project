@@ -55,12 +55,12 @@ class ClientsAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://database-project-server.herokuapp.com/database-project/Clients/add`
+      url: `https://database-project-server.herokuapp.com/database-project/List/Clients/add`
     })
     .then(response => {
       if(response.status === 200){
         console.log("Sekmingai pridetas");
-        this.props.history.push(`/database-project/Clients`);
+        this.props.history.push(`/database-project/List/Clients`);
       }
 
         // this.props.history.push(`/database-project/Clients`);
@@ -73,7 +73,7 @@ class ClientsAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/database-project/Clients`);
+    this.props.history.push(`/database-project/List/Clients`);
   }
 
   render () {

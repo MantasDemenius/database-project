@@ -66,7 +66,7 @@ class RestoranasAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://database-project-server.herokuapp.com/database-project/Restaurants/add`
+      url: `https://database-project-server.herokuapp.com/database-project/List/Restaurants/add`
     })
     .then(response => {
       if(response.status === 200){
@@ -83,18 +83,18 @@ class RestoranasAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/database-project/Restaurants`);
+    this.props.history.push(`/database-project/List/Restaurants`);
   }
 
   getDropdown = _ => {
-    axios.get('https://database-project-server.herokuapp.com/database-project/Companies')
+    axios.get('https://database-project-server.herokuapp.com/database-project/List/Companies')
     .then(response => {
       this.setState({
         CompanyItems: response.data.results
       });
     })
     .catch(error => console.log(error));
-    axios.get('https://database-project-server.herokuapp.com/database-project/Suppliers')
+    axios.get('https://database-project-server.herokuapp.com/database-project/List/Suppliers')
     .then(response => {
       this.setState({
         SupplierItems: response.data.results

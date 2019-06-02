@@ -17,7 +17,7 @@ class CommentsItem extends Component {
 
   getDropdown = _ => {
     //Get restaurants info
-    axios.get('https://database-project-server.herokuapp.com/database-project/Restaurants')
+    axios.get('https://database-project-server.herokuapp.com/database-project/List/Restaurants')
     .then(response => {
       this.setState({
         RestaurantItems: response.data.results
@@ -25,7 +25,7 @@ class CommentsItem extends Component {
     })
     .catch(error => console.log(error));
     //Get clients info
-    axios.get('https://database-project-server.herokuapp.com/database-project/Clients')
+    axios.get('https://database-project-server.herokuapp.com/database-project/List/Clients')
     .then(response => {
       this.setState({
         ClientItems: response.data.results

@@ -73,23 +73,23 @@ class MainPath extends Component {
   RouteCheck = (prop) => {
     const location = prop.location;
       switch(location){
-        case "/database-project/Companies":
+        case "/database-project/List/Companies":
           return (<Route path={`${location}`} render={props => (
                   <CompaniesItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/database-project/Restaurants":
+        case "/database-project/List/Restaurants":
           return (<Route path={`${location}`} render={props => (
                   <RestaurantsItem {...props} items={this.state.items} itemDel={this.itemDel}/>
           )} />)
-        case "/database-project/Suppliers":
+        case "/database-project/List/Suppliers":
           return (<Route path={`${location}`} render={props => (
                   <SuppliersItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/database-project/Clients":
+        case "/database-project/List/Clients":
           return (<Route path={`${location}`} render={props => (
                   <ClientsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)
-        case "/database-project/Comments":
+        case "/database-project/List/Comments":
           return (<Route path={`${location}`} render={props => (
                   <CommentsItem {...props} items={this.state.items} itemDel={this.itemDel} />
               )} />)

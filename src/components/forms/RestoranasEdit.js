@@ -69,7 +69,7 @@ class RestoranasEdit extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://database-project-server.herokuapp.com/database-project/Restaurants/edit`
+      url: `https://database-project-server.herokuapp.com/database-project/List/Restaurants/edit`
     })
     .then(response => {
       if(response.status === 200){

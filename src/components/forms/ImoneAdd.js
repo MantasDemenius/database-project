@@ -48,7 +48,7 @@ class ImoneAdd extends Component {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     },
-      url: `https://database-project-server.herokuapp.com/database-project/Companies/add`
+      url: `https://database-project-server.herokuapp.com/database-project/List/Companies/add`
     })
     .then(response => {
       if(response.status === 200){
@@ -71,7 +71,7 @@ class ImoneAdd extends Component {
 
   closeModal = _ => {
     document.getElementById('myModal').style.display = "none";
-    this.props.history.push(`/database-project/Companies`);
+    this.props.history.push(`/database-project/List/Companies`);
   }
 
 
