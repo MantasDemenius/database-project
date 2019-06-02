@@ -51,9 +51,11 @@ class ImoneAdd extends Component {
       url: `https://database-project-server.herokuapp.com/database-project/Companies/add`
     })
     .then(response => {
-      if(response.status === 200)
+      if(response.status === 200){
         console.log("Sekmingai pridetas");
         window.history.back();
+      }
+
         //this.props.history.push(`/database-project/Companies`);
         //window.location.reload();
 

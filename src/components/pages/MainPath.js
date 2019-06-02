@@ -44,8 +44,6 @@ class MainPath extends Component {
     axios.get(`https://database-project-server.herokuapp.com${url}`)
     .then(response => {
       this.setState({items: response.data.results});
-      console.log("getitems: ", this.state.items);
-      console.log("got items from server heroku");
     })
     .catch(error => console.log(error));
   }
