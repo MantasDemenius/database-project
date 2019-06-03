@@ -36,7 +36,6 @@ class RestoranasItem extends Component {
     //get which restaurants have which suppliers
     axios.get('https://database-project-server.herokuapp.com/database-project/List/Restaurants/suppliers')
     .then(response => {
-      console.log("ResSupp: ", response.data.results);
       this.setState({
         ResSuppItems: response.data.results
       });

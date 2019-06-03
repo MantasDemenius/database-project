@@ -62,7 +62,6 @@ class ReportOrder extends Component {
     })
     .then(response => {
       if(response.status === 200){
-      console.log(response.data.results);
       this.setState({data: response.data.results,
       loading: false})
       }
@@ -83,7 +82,6 @@ class ReportOrder extends Component {
     })
     .then(response => {
       if(response.status === 200){
-      console.log(response.data.results);
       this.setState({finalData: response.data.results[0],
       loading: false})
       }
